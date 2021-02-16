@@ -17,5 +17,32 @@
     "gatsby": "^2.32.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.7.0",
+    "eslint-config-jobber": "git+ssh://git@github.com:jobber-project/eslint-config-jobber.git",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "arrowParens": "avoid"
+  },
+  "eslintConfig": {
+    "extends": "jobber"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "!(*]).js": [
+      "eslint",
+      "prettier --write"
+    ]
   }
 }

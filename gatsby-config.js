@@ -1,6 +1,5 @@
 module.exports = {
   plugins: [
-    'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
@@ -10,9 +9,9 @@ module.exports = {
         background_color: '#f7f0eb',
         theme_color: '#a2466c',
         display: 'standalone',
+        icon: 'src/images/icon.png',
       },
     },
-    'gatsby-plugin-offline',
     {
       resolve: 'gatsby-plugin-google-analytics',
       options: {
@@ -25,5 +24,8 @@ module.exports = {
         cookieDomain: 'jobelo.se',
       },
     },
+    'gatsby-plugin-react-helmet',
+    'gatsby-plugin-offline',
+    'gatsby-plugin-no-index',
   ],
 }

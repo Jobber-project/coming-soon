@@ -45,11 +45,11 @@ const config = {
   angle: 90,
   spread: 360,
   startVelocity: 50,
-  elementCount: 300,
+  elementCount: 500,
   dragFriction: 0.2,
-  duration: 10000,
+  duration: 3000,
   stagger: 0,
-  width: '15px',
+  width: '20px',
   height: '10px',
   perspective: '500px',
   colors: ['#a864fd', '#29cdff', '#78ff44', '#ff718d', '#fdff6a'],
@@ -67,11 +67,7 @@ export default function Welcome() {
 
   return (
     <Box>
-      <Wrapper
-        onClick={() => {
-          setExplosion(true)
-        }}
-      >
+      <Wrapper>
         <Confetti active={explosion} config={config} />
         <Punchline title={TITLE} header={HEADER} paragraph={PARAGRAPH} />
       </Wrapper>

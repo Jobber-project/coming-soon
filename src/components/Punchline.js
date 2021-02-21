@@ -52,7 +52,7 @@ export default function Punchline({ title, header, paragraph }) {
   return (
     <PunchlineWrapper>
       <Title>{title}</Title>
-      <Header>{header}</Header>
+      {header && <Header>{header}</Header>}
       <Paragraph>{paragraph}</Paragraph>
     </PunchlineWrapper>
   )
@@ -66,7 +66,7 @@ Punchline.propTypes = {
 
 Punchline.defaultProps = {
   title: 'JOBELO',
-  header: 'Punchline',
+  header: '',
   paragraph:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Molestie viverra sapien accumsan, feugiat.',
 }

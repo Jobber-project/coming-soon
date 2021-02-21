@@ -61,11 +61,7 @@ const Paragraph = styled.p`
   margin-top: 30px;
 `
 
-function Punchline({
-  title = 'JOBELO',
-  header = 'Punchline',
-  paragraph = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Molestie viverra sapien accumsan, feugiat.',
-}) {
+function Punchline({ title, header, paragraph }) {
   return (
     <PunchlineWrapper>
       <Title>{title}</Title>
@@ -82,9 +78,10 @@ Punchline.propTypes = {
 }
 
 Punchline.defaultProps = {
-  title: '',
-  header: '',
-  paragraph: '',
+  title: 'JOBELO',
+  header: 'Punchline',
+  paragraph:
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Molestie viverra sapien accumsan, feugiat.',
 }
 
 export default function IndexPage() {

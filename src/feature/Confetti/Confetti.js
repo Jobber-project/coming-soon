@@ -1,8 +1,26 @@
 import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import Confetti from 'react-dom-confetti'
 
 import Punchline from '../../components/Punchline'
+
+const TITLE = 'JOBELO'
+const HEADER = 'Du hittade till Sveriges första sociala jobbsajt🤩'
+const PARAGRAPH =
+  'Jobelo är platsen där du kan skapa ett CV i världsklass, söka bland Sveriges alla jobbannonser och diskutera yrkesfrågor som hur man nailar arbetsintervjun, hittar drömjobbet, löneförhandlar eller planerar den årliga firmafesten med mycket mer! Självklart är allt helt gratis. Häng på! 😃'
+const TRANSITION = 500
+
+const fadeIn = keyframes`
+  from {
+    transform: scale(.25);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+`
 
 const Box = styled.div`
   position: absolute;
@@ -20,6 +38,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  animation: ${fadeIn} ${TRANSITION / 1000}s ease-out;
 `
 
 const config = {
@@ -40,8 +59,12 @@ export default function Welcome() {
   const [explosion, setExplosion] = useState(false)
 
   useEffect(() => {
-    if (explosion) setExplosion(false)
-  }, [explosion])
+    const timer = setTimeout(() => {
+      setExplosion(true)
+    }, TRANSITION - 150)
+    return () => clearTimeout(timer)
+  }, [])
+
   return (
     <Box>
       <Wrapper
@@ -50,7 +73,7 @@ export default function Welcome() {
         }}
       >
         <Confetti active={explosion} config={config} />
-        <Punchline title="title" header="header" paragraph="paragraph" />
+        <Punchline title={TITLE} header={HEADER} paragraph={PARAGRAPH} />
       </Wrapper>
     </Box>
   )

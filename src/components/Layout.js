@@ -1,13 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
+
+import Background from './Background'
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
 
   html,
-  body {
+  body,
+  #___gatsby,
+  #gatsby-focus-wrapper {
     width: 100%;
     height: 100%;
   }
@@ -21,11 +25,21 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
+const Main = styled.main`
+  z-index: 1;
+  position: relative;
+  width: 100%;
+  height: 100%;
+`
+
 export default function Layout({ children }) {
   return (
     <>
       <GlobalStyle />
-      {children}
+      <Main>
+        {children}
+        <Background />
+      </Main>
     </>
   )
 }

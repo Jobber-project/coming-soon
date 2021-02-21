@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Layout from '../components/Layout'
+
 export default function IndexPage() {
-  return <div>Coming soon</div>
+  return <Layout>Coming soon</Layout>
 }

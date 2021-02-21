@@ -2,7 +2,7 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import styled from 'styled-components'
 
-import Confetti from '../feature/Confetti/Confetti'
+import Welcome from '../feature/Confetti/Confetti'
 
 const Background = styled.div`
   background: linear-gradient(90deg, #775dfa 23.06%, #5a9ef5 98.75%);
@@ -29,7 +29,7 @@ export default function IndexPage() {
       </Helmet>
       <Background>
         <h1>Coming soon</h1>
-        <Confetti />
+        <Welcome />
       </Background>
     </>
   )

@@ -2938,7 +2938,7 @@ chokidar@^2.1.8:
   optionalDependencies:
     fsevents "^1.2.7"
 
-chokidar@^3.4.1, chokidar@^3.4.2, chokidar@^3.5.1:
+chokidar@^3.3.1, chokidar@^3.4.1, chokidar@^3.4.2, chokidar@^3.5.1:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.5.1.tgz#ee9ce7bbebd2b79f49f304799d5468e31e14e68a"
   integrity sha512-9+s+Od+W0VJJzawDma/gvBNQqkTiqYTWLuZoyAsivsI4AaWTCzHG06/TMjsf1cYe9Cb97UCEhjz7HvnPk2p/tw==
@@ -5584,6 +5584,13 @@ gatsby-plugin-no-index@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-no-index/-/gatsby-plugin-no-index-1.0.2.tgz#2e37e8ba381d398752581bc50d13c524efba65a0"
   integrity sha512-gCRkGfhBBdfEf/jc+Mos9J70FtJcM/39SjxBWpO8KpOASZEre6lsuDFnF0u8bc44VExN76GNEmpUf271LHPH3Q==
+
+gatsby-plugin-node-reload@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-node-reload/-/gatsby-plugin-node-reload-1.1.0.tgz#c676f046ae4d7087b4471b72f4555ee7040ea873"
+  integrity sha512-45ArvC7NsSRV2YuyngigKpyBGvkc86/M+hrQkORIfkMaOrEfsgVh/NkDdba9zPs4QQjCN+6qIyj0XEW17GePZw==
+  dependencies:
+    chokidar "^3.3.1"
 
 gatsby-plugin-offline@^3.10.0:
   version "3.10.0"

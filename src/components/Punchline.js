@@ -27,6 +27,7 @@ const Header = styled.h3`
   font-style: normal;
   font-weight: bold;
   font-size: 2.3rem;
+  text-align: center;
   letter-spacing: 0.12em;
   margin: 0;
 

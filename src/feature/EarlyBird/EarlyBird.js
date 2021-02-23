@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form'
 
 import Punchline from '../../components/Punchline'
 
+import Modal from './Modal'
+
 const TITLE = 'JOBELO'
 const PARAGRAPH =
   'Lansering är nära! Vill du vara redo när det händer? Skriv in e-mail nedan och starta klockan i gröna knappen så sköter magin resten! 😎'
@@ -191,6 +193,7 @@ export default function EarlyBird() {
           </Button>
         </Form>
       </Wrapper>
+      <Modal isVisible={visible} toggle={toggle} />
     </Box>
   )
 }

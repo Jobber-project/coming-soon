@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { useForm } from 'react-hook-form'
 
@@ -49,6 +49,7 @@ const Form = styled.form`
 
 const Email = styled.input`
   -webkit-appearance: none;
+  outline: none;
   appearance: none;
   display: inline-flex;
   border: none;
@@ -65,8 +66,6 @@ const Email = styled.input`
   &::placeholder {
     color: rgba(196, 196, 196, 0.5);
   }
-
-  margin-top: 15px;
 `
 
 const CheckboxWrapper = styled.div`
@@ -78,6 +77,7 @@ const CheckboxWrapper = styled.div`
 
 const Checkbox = styled.input`
   width: 16px;
+  outline: none;
   height: 16px;
   border-radius: 4px;
 `
@@ -90,6 +90,7 @@ const Label = styled.label`
 
 const Button = styled.button`
   -webkit-appearance: none;
+  outline: none;
   appearance: none;
   display: inline-flex;
   border: none;
@@ -101,46 +102,62 @@ const Button = styled.button`
   justify-content: center;
   height: 42px;
   background: #56bd66;
+  &:hover {
+    background: rgba(86, 189, 101, 0.8);
+  }
   border-radius: 8px;
 
   margin-top: 15px;
 `
 
-const ButtonText = styled.p`
+const ButtonText = styled(Label)`
   display: flex;
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 1rem;
+  cursor: pointer;
 
   color: #ffffff;
 `
 
-const Error = styled.p`
+const Error = styled.div`
   color: red;
-  font-family: Roboto, sans-serif;
-  font-style: normal;
+  padding-bottom: 8px;
+`
+
+const Policy = styled.div`
+  color: blue;
+  margin-left: 5px;
+  text-decoration: underline;
+  cursor: pointer;
 `
 
 export default function EarlyBird() {
   const { register, handleSubmit, errors } = useForm()
+  const [visible, setVisible] = useState(false)
+
+  function toggle() {
+    setVisible(!visible)
+  }
 
   async function handleEarlyBird({ email }) {
     try {
+      console.log('email', email)
       // Do something
     } catch (err) {
-      logger.error(err)
+      console.log('err', err)
     }
   }
-
-  console.log('errors', errors)
 
   return (
     <Box>
       <Wrapper>
         <Punchline title={TITLE} paragraph={PARAGRAPH} />
         <Form autoComplete="off" onSubmit={handleSubmit(handleEarlyBird)}>
-          <Error>{errors?.email?.message || 'Ange E-postadress'}</Error>
+          {errors?.email && (
+            <Error>{errors?.email?.message || 'Ange E-postadress'}</Error>
+          )}
           <Email
             placeholder="Ange e-postadress"
             type="input"
@@ -164,8 +181,9 @@ export default function EarlyBird() {
               name="policy"
             />
             <Label htmlFor="checkbox" error={errors?.policy}>
-              Jag godkänner villkoren
+              Jag godkänner
             </Label>
+            <Policy onClick={toggle}>villkoren</Policy>
           </CheckboxWrapper>
 
           <Button>

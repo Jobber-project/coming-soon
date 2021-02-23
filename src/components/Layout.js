@@ -4,6 +4,7 @@ import styled, { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
 
 import Background from './Background'
+import Wave from './Wave'
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -38,6 +39,7 @@ export default function Layout({ children }) {
       <GlobalStyle />
       <Main>
         {children}
+        <Wave />
         <Background />
       </Main>
     </>

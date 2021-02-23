@@ -23,7 +23,7 @@ const Img = styled.img`
 export default function Background() {
   return (
     <Container aria-hidden="true">
-      <Img src={WavesImg} alt="" />
+      {/* <Img src={WavesImg} alt="" /> */}
     </Container>
   )
 }

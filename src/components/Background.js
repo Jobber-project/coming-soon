@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import DotSquare from './decoration/DotSquare'
+import Waves from './decoration/Waves'
 import Wave from './Wave'
 
 const Container = styled.div`
@@ -28,6 +29,7 @@ export default function Background() {
       <Inner>
         <Wave />
         <DotSquare />
+        <Waves />
       </Inner>
     </Container>
   )

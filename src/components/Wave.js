@@ -69,8 +69,8 @@ export default function Wave() {
             <animate
               attributeName="x"
               from="0"
-              to="-800"
-              dur="100s"
+              to="-3200"
+              dur="400s"
               repeatCount="indefinite"
             />
           </use>

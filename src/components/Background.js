@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import WavesImg from '../images/waves.svg'
+import DotSquare from './decoration/DotSquare'
+import Wave from './Wave'
 
 const Container = styled.div`
   z-index: -1;
@@ -14,16 +15,20 @@ const Container = styled.div`
   pointer-events: none;
 `
 
-const Img = styled.img`
+const Inner = styled.div`
+  z-index: 1;
+  position: relative;
   width: 100%;
   height: 100%;
-  object-fit: cover;
 `
 
 export default function Background() {
   return (
     <Container aria-hidden="true">
-      {/* <Img src={WavesImg} alt="" /> */}
+      <Inner>
+        <Wave />
+        <DotSquare />
+      </Inner>
     </Container>
   )
 }

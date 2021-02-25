@@ -55,7 +55,7 @@ const Email = styled.input`
   appearance: none;
   display: inline-flex;
   border: none;
-  font-size: 1rem;
+  font-size: 1.6rem;
   color: inherit;
   cursor: pointer;
 
@@ -117,7 +117,7 @@ const ButtonText = styled(Label)`
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 1.6rem;
   cursor: pointer;
 
   color: #ffffff;

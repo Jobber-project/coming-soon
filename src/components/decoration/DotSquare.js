@@ -4,16 +4,14 @@ import styled from 'styled-components'
 const Svg = styled.svg`
   z-index: 1;
   position: absolute;
-  top: 39%;
+  top: 355px;
   top: clamp(100px, 39%, 355px);
-  left: 9%;
+  left: 120px;
   left: clamp(20px, 9%, 120px);
+  visibility: hidden;
 
-  @media (min-width: 600px) {
-    top: 355px;
-    top: clamp(100px, 39%, 355px);
-    left: 120px;
-    left: clamp(20px, 9%, 120px);
+  @media (min-width: 900px) {
+    visibility: visible;
   }
 `
 

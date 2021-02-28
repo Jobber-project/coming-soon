@@ -155,43 +155,44 @@ export default function EarlyBird() {
   return (
     <Box>
       <Wrapper>
-        <Punchline title={TITLE} paragraph={PARAGRAPH} />
-        <Form autoComplete="off" onSubmit={handleSubmit(handleEarlyBird)}>
-          {errors?.email && (
-            <Error>{errors?.email?.message || 'Ange E-postadress'}</Error>
-          )}
-          <Email
-            placeholder="Ange e-postadress"
-            type="input"
-            ref={register({
-              required: true,
-              pattern: {
-                value: /[^@]+@[^@]+\w[^@]+/,
-                message: 'Ange en korrekt E-postadress',
-              },
-            })}
-            name="email"
-          />
-          <CheckboxWrapper>
-            <Checkbox
-              type="checkbox"
-              id="checkbox"
+        <Punchline title={TITLE} paragraph={PARAGRAPH}>
+          <Form autoComplete="off" onSubmit={handleSubmit(handleEarlyBird)}>
+            {errors?.email && (
+              <Error>{errors?.email?.message || 'Ange E-postadress'}</Error>
+            )}
+            <Email
+              placeholder="Ange e-postadress"
+              type="input"
               ref={register({
                 required: true,
+                pattern: {
+                  value: /[^@]+@[^@]+\w[^@]+/,
+                  message: 'Ange en korrekt E-postadress',
+                },
               })}
-              ariaRequired="true"
-              name="policy"
+              name="email"
             />
-            <Label htmlFor="checkbox" error={errors?.policy}>
-              Jag godkänner
-            </Label>
-            <Policy onClick={toggle}>villkoren</Policy>
-          </CheckboxWrapper>
+            <CheckboxWrapper>
+              <Checkbox
+                type="checkbox"
+                id="checkbox"
+                ref={register({
+                  required: true,
+                })}
+                ariaRequired="true"
+                name="policy"
+              />
+              <Label htmlFor="checkbox" error={errors?.policy}>
+                Jag godkänner
+              </Label>
+              <Policy onClick={toggle}>villkoren</Policy>
+            </CheckboxWrapper>
 
-          <Button>
-            <ButtonText>Följ oss redan idag!</ButtonText>
-          </Button>
-        </Form>
+            <Button>
+              <ButtonText>Följ oss redan idag!</ButtonText>
+            </Button>
+          </Form>
+        </Punchline>
       </Wrapper>
       <Modal isVisible={visible} toggle={toggle} />
     </Box>

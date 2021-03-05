@@ -1,5 +1,6 @@
 module.exports = {
   plugins: [
+    'gatsby-plugin-styled-components',
     'gatsby-plugin-node-reload',
     {
       resolve: 'gatsby-plugin-manifest',

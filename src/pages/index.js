@@ -16,7 +16,7 @@ export default function IndexPage() {
   }, [])
 
   return (
-    <Layout>
+    <Layout title="Jobelo">
       <Welcome />
     </Layout>
   )

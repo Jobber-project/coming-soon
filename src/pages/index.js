@@ -1,11 +1,20 @@
-import React, { useEffect } from 'react'
-import { navigate } from 'gatsby'
+import React, { useState, useEffect } from 'react'
+import { Link, navigate } from 'gatsby'
+import styled from 'styled-components'
 
 import Layout from '../components/Layout'
 import Welcome from '../feature/Confetti/Confetti'
 
+const Preloader = styled.div`
+  display: ${props => (props.hidden ? 'none' : 'block')};
+`
+
 export default function IndexPage() {
+  const [hidePreload, setHidePreload] = useState(false)
+
   useEffect(() => {
+    setHidePreload(true)
+
     const timeout = setTimeout(() => {
       navigate('/earlybird')
     }, 10000)
@@ -18,6 +27,11 @@ export default function IndexPage() {
   return (
     <Layout title="Jobelo">
       <Welcome />
+      <Preloader hidden={hidePreload}>
+        <Link to="/earlybird" rel="preload">
+          Earlybird
+        </Link>
+      </Preloader>
     </Layout>
   )
 }

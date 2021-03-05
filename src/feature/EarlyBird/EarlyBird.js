@@ -85,6 +85,7 @@ const Checkbox = styled.input`
 const Label = styled.label`
   margin-left: 12px;
   color: ${p => (p.error ? '#FF0000' : '#ffffff')};
+  user-select: none;
 `
 
 const Button = styled.button`
@@ -95,18 +96,22 @@ const Button = styled.button`
   border: none;
   color: inherit;
   cursor: pointer;
-
   display: flex;
   align-items: center;
   justify-content: center;
   height: 42px;
   background: #56bd66;
-  &:hover {
-    background: rgba(86, 189, 101, 0.8);
-  }
   border-radius: 8px;
-
   margin-top: 15px;
+  transition: background 140ms ease-out;
+
+  &:hover {
+    background: #5ec36e;
+  }
+
+  &:active {
+    background: #55b363;
+  }
 `
 
 const ButtonText = styled(Label)`
@@ -125,7 +130,7 @@ const Error = styled.div`
 `
 
 const Policy = styled.span`
-  color: white;
+  color: inherit;
   margin-left: 5px;
   text-decoration: underline;
   cursor: pointer;
@@ -180,8 +185,10 @@ export default function EarlyBird() {
             />
             <Label htmlFor="checkbox" error={errors?.policy}>
               Jag godkänner
+              <Policy error={errors?.policy} onClick={toggle}>
+                villkoren
+              </Policy>
             </Label>
-            <Policy onClick={toggle}>villkoren</Policy>
           </CheckboxWrapper>
 
           <Button>

@@ -57,7 +57,6 @@ const Email = styled.input`
   border: none;
   font-size: 1.6rem;
   color: inherit;
-  cursor: pointer;
 
   height: 42px;
   padding-left: 42px;

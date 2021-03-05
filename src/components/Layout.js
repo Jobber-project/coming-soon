@@ -1,5 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'gatsby'
+import { Helmet } from 'react-helmet'
 import styled, { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
 
@@ -54,10 +56,19 @@ const Main = styled.main`
 export default function Layout({ children }) {
   return (
     <>
+      <Helmet>
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap"
+          rel="stylesheet"
+        />
+      </Helmet>
       <GlobalStyle />
       <Head>
         <LogoWrapper>
-          <Logo />
+          <Link to="/">
+            <Logo />
+          </Link>
         </LogoWrapper>
       </Head>
       <Main>

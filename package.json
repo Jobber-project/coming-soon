@@ -31,7 +31,8 @@
     "react-helmet": "^6.1.0",
     "react-hook-form": "^6.15.3",
     "react-is": "^16.8.0",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "styled-reset": "^4.3.4"
   },
   "devDependencies": {
     "eslint": "^7.7.0",

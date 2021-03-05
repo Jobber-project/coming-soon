@@ -1,25 +1,12 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import styled from 'styled-components'
 
 import Navigator from '../feature/Navigator/Navigator'
-
-const Background = styled.div`
-  background: linear-gradient(90deg, #775dfa 23.06%, #5a9ef5 98.75%);
-  background-attachment: fixed;
-  min-height: 100%;
-
-  width: 100%;
-  height: auto;
-
-  position: fixed;
-  top: 0;
-  left: 0;
-`
+import Layout from '../components/Layout'
 
 export default function IndexPage() {
   return (
-    <>
+    <Layout>
       <Helmet>
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
@@ -27,10 +14,7 @@ export default function IndexPage() {
           rel="stylesheet"
         />
       </Helmet>
-      <Background>
-        <h1>Coming soon</h1>
-        <Navigator />
-      </Background>
-    </>
+      <Navigator />
+    </Layout>
   )
 }

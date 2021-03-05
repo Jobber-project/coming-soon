@@ -51,7 +51,7 @@ const Title = styled.h1`
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: 500;
-  font-size: 2rem;
+  font-size: 3.2rem;
   text-align: center;
 `
 
@@ -59,7 +59,7 @@ const Text = styled.p`
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: 300;
-  font-size: 1rem;
+  font-size: 1.6rem;
 `
 
 export default function Modal({ isVisible, toggle }) {

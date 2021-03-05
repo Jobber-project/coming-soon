@@ -7,6 +7,7 @@ import Welcome from '../feature/Confetti/Confetti'
 
 const Preloader = styled.div`
   display: ${props => (props.hidden ? 'none' : 'block')};
+  visibility: hidden;
 `
 
 export default function IndexPage() {

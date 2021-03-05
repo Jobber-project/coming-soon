@@ -61,8 +61,6 @@ const Email = styled.input`
 
   height: 42px;
   padding-left: 42px;
-  font-family: Roboto, sans-serif;
-  font-style: normal;
   border-radius: 8px;
 
   &::placeholder {
@@ -86,7 +84,6 @@ const Checkbox = styled.input`
 
 const Label = styled.label`
   margin-left: 12px;
-  font-family: Roboto, sans-serif;
   color: ${p => (p.error ? '#FF0000' : '#ffffff')};
 `
 
@@ -114,7 +111,6 @@ const Button = styled.button`
 
 const ButtonText = styled(Label)`
   display: flex;
-  font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 1.6rem;
@@ -128,8 +124,8 @@ const Error = styled.div`
   padding-bottom: 8px;
 `
 
-const Policy = styled.div`
-  color: blue;
+const Policy = styled.span`
+  color: white;
   margin-left: 5px;
   text-decoration: underline;
   cursor: pointer;

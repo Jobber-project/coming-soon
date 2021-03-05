@@ -12,8 +12,6 @@ const PunchlineWrapper = styled.div`
 `
 
 const Title = styled.h1`
-  font-family: Roboto, sans-serif;
-  font-style: normal;
   font-weight: bold;
   font-size: 6.4rem;
   letter-spacing: 0.12em;
@@ -23,8 +21,6 @@ const Title = styled.h1`
 `
 
 const Header = styled.h3`
-  font-family: Roboto, sans-serif;
-  font-style: normal;
   font-weight: bold;
   font-size: 3.6rem;
   text-align: center;
@@ -36,15 +32,13 @@ const Header = styled.h3`
 `
 
 const Paragraph = styled.p`
-  font-family: Roboto, sans-serif;
-  font-style: normal;
   font-weight: 300;
   font-size: 1.6rem;
   text-align: center;
   line-height: 200%;
   margin: 0;
 
-  color: #ffffff;
+  color: white;
   margin-top: 30px;
 `
 

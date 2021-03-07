@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Link, navigate } from 'gatsby'
 import styled from 'styled-components'
-import {
-  ApolloClient,
-  HttpLink,
-  ApolloProvider,
-  InMemoryCache,
-} from '@apollo/client'
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 
 import Layout from '../components/Layout'
-import Welcome from '../feature/Confetti/Confetti'
+import Welcome from '../features/Confetti/Confetti'
 
 const Preloader = styled.div`
   display: ${props => (props.hidden ? 'none' : 'block')};

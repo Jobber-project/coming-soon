@@ -146,23 +146,21 @@ export default function EarlyBird() {
   const { register, handleSubmit, errors } = useForm()
   const [visible, setVisible] = useState(false)
   const [createUser] = useMutation(CREATE_EARLYBIRD)
-  const [done, setDone] = useState(false)
-  const [error, setError] = useState(null)
+  const [signup, setSignup] = useState('')
 
   function toggle() {
     setVisible(!visible)
   }
 
   async function handleEarlyBird({ email }) {
+    if (signup === email) return
     try {
       await createUser({
         variables: { email },
       })
-      setDone(true)
-      // Do something
+      setSignup(email)
     } catch (err) {
-      console.log('error', err)
-      setError(err)
+      // Random err
     }
   }
 
@@ -205,7 +203,9 @@ export default function EarlyBird() {
             </CheckboxWrapper>
 
             <Button>
-              <ButtonText>Följ oss redan idag!</ButtonText>
+              <ButtonText>
+                {signup ? 'Tack!' : 'Följ oss redan idag!'}
+              </ButtonText>
             </Button>
           </Form>
         </Punchline>

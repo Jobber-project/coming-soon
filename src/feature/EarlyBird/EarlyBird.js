@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { useForm } from 'react-hook-form'
+import { gql, useMutation } from '@apollo/client'
 
 import Punchline from '../../components/Punchline'
 
@@ -135,9 +136,18 @@ const Policy = styled.span`
   cursor: pointer;
 `
 
+const CREATE_EARLYBIRD = gql`
+  mutation addEarlybird($email: String!) {
+    addEarlybird(email: $email)
+  }
+`
+
 export default function EarlyBird() {
   const { register, handleSubmit, errors } = useForm()
   const [visible, setVisible] = useState(false)
+  const [createUser] = useMutation(CREATE_EARLYBIRD)
+  const [done, setDone] = useState(false)
+  const [error, setError] = useState(null)
 
   function toggle() {
     setVisible(!visible)
@@ -145,10 +155,14 @@ export default function EarlyBird() {
 
   async function handleEarlyBird({ email }) {
     try {
-      console.log('email', email)
+      await createUser({
+        variables: { email },
+      })
+      setDone(true)
       // Do something
     } catch (err) {
-      console.log('err', err)
+      console.log('error', err)
+      setError(err)
     }
   }
 

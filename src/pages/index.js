@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Link, navigate } from 'gatsby'
 import styled from 'styled-components'
+import {
+  ApolloClient,
+  HttpLink,
+  ApolloProvider,
+  InMemoryCache,
+} from '@apollo/client'
 
 import Layout from '../components/Layout'
 import Welcome from '../feature/Confetti/Confetti'
@@ -9,6 +15,11 @@ const Preloader = styled.div`
   display: ${props => (props.hidden ? 'none' : 'block')};
   visibility: hidden;
 `
+
+const client = new ApolloClient({
+  uri: 'https://dev-jobber-api-l.azurewebsites.net/graphql',
+  cache: new InMemoryCache(),
+})
 
 export default function IndexPage() {
   const [hidePreload, setHidePreload] = useState(false)
@@ -26,13 +37,15 @@ export default function IndexPage() {
   }, [])
 
   return (
-    <Layout title="Jobelo">
-      <Welcome />
-      <Preloader hidden={hidePreload}>
-        <Link to="/earlybird" rel="preload">
-          Earlybird
-        </Link>
-      </Preloader>
-    </Layout>
+    <ApolloProvider client={client}>
+      <Layout title="Jobelo">
+        <Welcome />
+        <Preloader hidden={hidePreload}>
+          <Link to="/earlybird" rel="preload">
+            Earlybird
+          </Link>
+        </Preloader>
+      </Layout>
+    </ApolloProvider>
   )
 }

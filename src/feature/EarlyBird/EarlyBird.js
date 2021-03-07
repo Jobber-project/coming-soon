@@ -55,14 +55,11 @@ const Email = styled.input`
   appearance: none;
   display: inline-flex;
   border: none;
-  font-size: 1rem;
+  font-size: 1.6rem;
   color: inherit;
-  cursor: pointer;
 
   height: 42px;
   padding-left: 42px;
-  font-family: Roboto, sans-serif;
-  font-style: normal;
   border-radius: 8px;
 
   &::placeholder {
@@ -86,8 +83,8 @@ const Checkbox = styled.input`
 
 const Label = styled.label`
   margin-left: 12px;
-  font-family: Roboto, sans-serif;
   color: ${p => (p.error ? '#FF0000' : '#ffffff')};
+  user-select: none;
 `
 
 const Button = styled.button`
@@ -98,26 +95,29 @@ const Button = styled.button`
   border: none;
   color: inherit;
   cursor: pointer;
-
   display: flex;
   align-items: center;
   justify-content: center;
   height: 42px;
   background: #56bd66;
-  &:hover {
-    background: rgba(86, 189, 101, 0.8);
-  }
   border-radius: 8px;
-
   margin-top: 15px;
+  transition: background 140ms ease-out;
+
+  &:hover {
+    background: #5ec36e;
+  }
+
+  &:active {
+    background: #55b363;
+  }
 `
 
 const ButtonText = styled(Label)`
   display: flex;
-  font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 1.6rem;
   cursor: pointer;
 
   color: #ffffff;
@@ -128,8 +128,8 @@ const Error = styled.div`
   padding-bottom: 8px;
 `
 
-const Policy = styled.div`
-  color: blue;
+const Policy = styled.span`
+  color: inherit;
   margin-left: 5px;
   text-decoration: underline;
   cursor: pointer;
@@ -184,8 +184,10 @@ export default function EarlyBird() {
               />
               <Label htmlFor="checkbox" error={errors?.policy}>
                 Jag godkänner
+                <Policy error={errors?.policy} onClick={toggle}>
+                  villkoren
+                </Policy>
               </Label>
-              <Policy onClick={toggle}>villkoren</Policy>
             </CheckboxWrapper>
 
             <Button>

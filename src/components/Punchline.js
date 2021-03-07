@@ -34,10 +34,8 @@ const PunchlineWrapper = styled.div`
 `
 
 const Title = styled.h1`
-  font-family: Roboto, sans-serif;
-  font-style: normal;
   font-weight: bold;
-  font-size: 4rem;
+  font-size: 6.4rem;
   letter-spacing: 0.12em;
   margin: 0;
 
@@ -45,10 +43,8 @@ const Title = styled.h1`
 `
 
 const Header = styled.h3`
-  font-family: Roboto, sans-serif;
-  font-style: normal;
   font-weight: bold;
-  font-size: 2.3rem;
+  font-size: 3.6rem;
   text-align: center;
   letter-spacing: 0.12em;
   margin: 0;
@@ -58,15 +54,13 @@ const Header = styled.h3`
 `
 
 const Paragraph = styled.p`
-  font-family: Roboto, sans-serif;
-  font-style: normal;
   font-weight: 300;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   text-align: center;
   line-height: 200%;
   margin: 0;
 
-  color: #ffffff;
+  color: white;
   margin-top: 30px;
 `
 
@@ -90,6 +84,7 @@ Punchline.propTypes = {
   title: PropTypes.string,
   header: PropTypes.string,
   paragraph: PropTypes.string,
+  children: PropTypes.node,
 }
 
 Punchline.defaultProps = {
@@ -97,4 +92,5 @@ Punchline.defaultProps = {
   header: '',
   paragraph:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Molestie viverra sapien accumsan, feugiat.',
+  children: null,
 }

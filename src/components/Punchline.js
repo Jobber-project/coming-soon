@@ -74,7 +74,10 @@ export default function Punchline({ title, header, paragraph, children }) {
     <PunchlineWrapper>
       <Title>{title}</Title>
       {content.filter(Boolean).map((item, index) => (
-        <Container index={index}>{item}</Container>
+        // eslint-disable-next-line react/no-array-index-key
+        <Container key={index} index={index}>
+          {item}
+        </Container>
       ))}
     </PunchlineWrapper>
   )

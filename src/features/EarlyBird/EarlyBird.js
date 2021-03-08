@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { useForm } from 'react-hook-form'
+import { gql, useMutation } from '@apollo/client'
 
 import Punchline from '../../components/Punchline'
 
@@ -135,65 +136,79 @@ const Policy = styled.span`
   cursor: pointer;
 `
 
+const CREATE_EARLYBIRD = gql`
+  mutation addEarlybird($email: String!) {
+    addEarlybird(email: $email)
+  }
+`
+
 export default function EarlyBird() {
   const { register, handleSubmit, errors } = useForm()
   const [visible, setVisible] = useState(false)
+  const [createUser] = useMutation(CREATE_EARLYBIRD)
+  const [signup, setSignup] = useState('')
 
   function toggle() {
     setVisible(!visible)
   }
 
   async function handleEarlyBird({ email }) {
+    if (signup === email) return
     try {
-      console.log('email', email)
-      // Do something
+      await createUser({
+        variables: { email },
+      })
+      setSignup(email)
     } catch (err) {
-      console.log('err', err)
+      // Random err
     }
   }
 
   return (
     <Box>
       <Wrapper>
-        <Punchline title={TITLE} paragraph={PARAGRAPH} />
-        <Form autoComplete="off" onSubmit={handleSubmit(handleEarlyBird)}>
-          {errors?.email && (
-            <Error>{errors?.email?.message || 'Ange E-postadress'}</Error>
-          )}
-          <Email
-            placeholder="Ange e-postadress"
-            type="input"
-            ref={register({
-              required: true,
-              pattern: {
-                value: /[^@]+@[^@]+\w[^@]+/,
-                message: 'Ange en korrekt E-postadress',
-              },
-            })}
-            name="email"
-          />
-          <CheckboxWrapper>
-            <Checkbox
-              type="checkbox"
-              id="checkbox"
+        <Punchline title={TITLE} paragraph={PARAGRAPH}>
+          <Form autoComplete="off" onSubmit={handleSubmit(handleEarlyBird)}>
+            {errors?.email && (
+              <Error>{errors?.email?.message || 'Ange E-postadress'}</Error>
+            )}
+            <Email
+              placeholder="Ange e-postadress"
+              type="input"
               ref={register({
                 required: true,
+                pattern: {
+                  value: /[^@]+@[^@]+\w[^@]+/,
+                  message: 'Ange en korrekt E-postadress',
+                },
               })}
-              ariaRequired="true"
-              name="policy"
+              name="email"
             />
-            <Label htmlFor="checkbox" error={errors?.policy}>
-              Jag godkänner
-              <Policy error={errors?.policy} onClick={toggle}>
-                villkoren
-              </Policy>
-            </Label>
-          </CheckboxWrapper>
+            <CheckboxWrapper>
+              <Checkbox
+                type="checkbox"
+                id="checkbox"
+                ref={register({
+                  required: true,
+                })}
+                ariaRequired="true"
+                name="policy"
+              />
+              <Label htmlFor="checkbox" error={errors?.policy}>
+                Jag godkänner
+                <Policy error={errors?.policy} onClick={toggle}>
+                  villkoren
+                </Policy>
+              </Label>
+            </CheckboxWrapper>
 
-          <Button>
-            <ButtonText>Följ oss redan idag!</ButtonText>
-          </Button>
-        </Form>
+            <Button>
+              <ButtonText>
+                {signup ? 'Tack!' : 'Följ oss redan idag!'}
+              </ButtonText>
+            </Button>
+          </Form>
+        </Punchline>
       </Wrapper>
       <Modal isVisible={visible} toggle={toggle} />
     </Box>

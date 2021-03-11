@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-const ModalBackground = styled.div`
+const ModalOldBackground = styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -12,7 +12,7 @@ const ModalBackground = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 `
 
-const ModalOverlay = styled.div`
+const ModalOldOverlay = styled.div`
   align-items: center;
   justify-content: center;
   display: flex;
@@ -24,7 +24,7 @@ const ModalOverlay = styled.div`
   z-index: 2;
 `
 
-const ModalContent = styled.div`
+const ModalOldContent = styled.div`
   display: flex;
   flex: 1;
   position: relative;
@@ -58,12 +58,12 @@ const Text = styled.p`
   font-size: 1.6rem;
 `
 
-export default function Modal({ isVisible, toggle }) {
+export default function ModalOld({ isVisible, toggle }) {
   return isVisible ? (
     <>
-      <ModalBackground onClick={toggle} />
-      <ModalOverlay>
-        <ModalContent>
+      <ModalOldBackground onClick={toggle} />
+      <ModalOldOverlay>
+        <ModalOldContent>
           <CrossButton type="button" aria-label="Close" onClick={toggle}>
             <div>&times;</div>
           </CrossButton>
@@ -76,18 +76,18 @@ export default function Modal({ isVisible, toggle }) {
               sapiente ex illo?
             </Text>
           </Content>
-        </ModalContent>
-      </ModalOverlay>
+        </ModalOldContent>
+      </ModalOldOverlay>
     </>
   ) : null
 }
 
-Modal.propTypes = {
+ModalOld.propTypes = {
   isVisible: PropTypes.bool,
   toggle: PropTypes.func,
 }
 
-Modal.defaultProps = {
+ModalOld.defaultProps = {
   isVisible: false,
   toggle: undefined,
 }

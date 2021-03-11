@@ -28,5 +28,6 @@ module.exports = {
     },
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-no-index',
+    'gatsby-plugin-portal',
   ],
 }

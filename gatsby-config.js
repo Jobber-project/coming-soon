@@ -29,5 +29,13 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-no-index',
     'gatsby-plugin-portal',
+    {
+      resolve: 'gatsby-plugin-react-svg',
+      options: {
+        rule: {
+          include: /svg\/.*\.svg$/,
+        },
+      },
+    },
   ],
 }

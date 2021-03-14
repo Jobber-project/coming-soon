@@ -1,8 +1,52 @@
-import React, { useImperativeHandle, useState, useEffect } from 'react'
+import React, { useImperativeHandle, useRef, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 import Portal from './Portal'
+
+const backdropFadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+`
+
+const backdropFadeOut = keyframes`
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+`
+
+const containerFadeIn = keyframes`
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateY(50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+`
+
+const containerFadeOut = keyframes`
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  
+  100% {
+    opacity: 0;
+    transform: scale(0.8) translateY(50px);
+  }
+`
 
 const Wrapper = styled.div`
   z-index: ${props => (props.$visible ? 2 : -1)};
@@ -29,6 +73,8 @@ const Backdrop = styled.div`
   bottom: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
+  animation: ${props => (props.$closing ? backdropFadeOut : backdropFadeIn)}
+    180ms ease-out;
 `
 
 const Container = styled.section`
@@ -36,21 +82,62 @@ const Container = styled.section`
   background-color: white;
   max-height: 100%;
   box-sizing: border-box;
+  animation: ${props => (props.$closing ? containerFadeOut : containerFadeIn)}
+    180ms ease-out;
 `
 
 const Modal = React.forwardRef(({ labelledBy, className, children }, ref) => {
   const [visible, setVisible] = useState(false)
+  const [closing, setClosing] = useState(false)
+
+  const backdropRef = useRef(null)
 
   useImperativeHandle(ref, () => ({
     open: () => (visible ? undefined : setVisible(true)),
-    close: () => (visible ? setVisible(false) : undefined),
-    toggle: () => setVisible(prev => !prev),
+    close: () => (visible && !closing ? setClosing(true) : undefined),
+    toggle: () => {
+      if (visible && !closing) {
+        setClosing(true)
+      } else if (!visible && !closing) {
+        setVisible(true)
+      }
+    },
   }))
+
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setVisible(false)
+  //     setClosing(false)
+  //   }, 180)
+
+  //   return () => {
+  //     clearTimeout(timer)
+  //   }
+  // }, [closing])
+
+  useEffect(() => {
+    const { current: backdrop } = backdropRef
+
+    function handleAnimationEnd() {
+      setVisible(false)
+      setClosing(false)
+    }
+
+    backdrop.addEventListener('animationend', handleAnimationEnd)
+
+    return () => {
+      backdrop.removeEventListener('animationend', handleAnimationEnd)
+    }
+  }, [closing])
 
   useEffect(() => {
     function handleEscape({ keyCode, key }) {
-      if (visible && (keyCode === 27 || key === 'Escape' || key === 'Esc')) {
-        setVisible(false)
+      if (
+        visible &&
+        !closing &&
+        (keyCode === 27 || key === 'Escape' || key === 'Esc')
+      ) {
+        setClosing(true)
       }
     }
 
@@ -59,15 +146,22 @@ const Modal = React.forwardRef(({ labelledBy, className, children }, ref) => {
     return () => {
       document.removeEventListener('keydown', handleEscape)
     }
-  }, [visible])
+  }, [closing, visible])
 
   return (
     <Portal>
       <Wrapper $visible={visible}>
-        <Backdrop onClick={visible ? () => setVisible(false) : undefined} />
+        <Backdrop
+          ref={backdropRef}
+          key={`backdrop-${visible}-${closing}`}
+          $closing={closing}
+          onClick={visible && !closing ? () => setClosing(true) : undefined}
+        />
         {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
         {visible && <div tabIndex={0} />}
         <Container
+          key={`container-${visible}-${closing}`}
+          $closing={closing}
           className={className}
           aria-labelledby={labelledBy}
           aria-modal="true"

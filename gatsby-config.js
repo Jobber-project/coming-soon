@@ -37,5 +37,11 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: 'gatsby-plugin-apollo',
+      options: {
+        uri: 'https://dev-jobber-api-l.azurewebsites.net/graphql',
+      },
+    },
   ],
 }

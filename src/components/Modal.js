@@ -104,17 +104,6 @@ const Modal = React.forwardRef(({ labelledBy, className, children }, ref) => {
     },
   }))
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setVisible(false)
-  //     setClosing(false)
-  //   }, 180)
-
-  //   return () => {
-  //     clearTimeout(timer)
-  //   }
-  // }, [closing])
-
   useEffect(() => {
     const { current: backdrop } = backdropRef
 

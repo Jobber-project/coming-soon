@@ -1,10 +1,15 @@
 import { useRef, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 
-const root = document?.getElementById?.('portal')
+const root =
+  typeof document !== 'undefined'
+    ? document.getElementById?.('portal')
+    : undefined
 
 export default function Portal({ children }) {
-  const elementRef = useRef(document?.createElement?.('div'))
+  const elementRef = useRef(
+    typeof document !== 'undefined' ? document.createElement('div') : null,
+  )
 
   useEffect(() => {
     const { current: element } = elementRef

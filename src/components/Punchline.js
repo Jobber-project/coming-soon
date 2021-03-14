@@ -52,6 +52,9 @@ const PunchlineWrapper = styled.div`
   justify-content: center;
 
   max-width: 80%;
+  @media ${device.laptop} {
+    max-width: 600px;
+  }
 `
 
 const Title = styled.h1`
@@ -67,7 +70,7 @@ const Title = styled.h1`
 `
 
 const Header = styled.h3`
-  font-weight: bold;
+  font-weight: 700;
   font-size: 2.5rem;
   text-align: center;
   letter-spacing: 0.12em;

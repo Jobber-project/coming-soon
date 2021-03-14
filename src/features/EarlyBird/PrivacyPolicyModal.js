@@ -31,6 +31,8 @@ const TitleRow = styled.div`
 `
 
 const CloseButton = styled.button`
+  z-index: 1;
+  position: relative;
   appearance: none;
   border: none;
   margin: 0;
@@ -42,6 +44,16 @@ const CloseButton = styled.button`
   -webkit-font-smoothing: inherit;
   -moz-osx-font-smoothing: inherit;
   cursor: pointer;
+
+  &::after {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    bottom: -15px;
+    left: -15px;
+  }
 `
 
 const Title = styled.h1`
@@ -101,7 +113,21 @@ const ScrollButtonWrapper = styled.div`
   padding: 0 15px;
 `
 
-const ScrollButton = styled(CloseButton)`
+const ScrollButton = styled.button`
+  z-index: 1;
+  position: relative;
+  appearance: none;
+  border: none;
+  margin: 0;
+  padding: 0 3px;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  font: inherit;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  cursor: pointer;
+
   display: flex;
   align-items: center;
   justify-content: center;

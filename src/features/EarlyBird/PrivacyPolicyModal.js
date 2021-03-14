@@ -74,7 +74,7 @@ const LastUpdate = styled.p`
 
 const Body = styled.div`
   padding: 0 17px;
-  overflow: scroll;
+  overflow-y: scroll;
 `
 
 const Header = styled.h2`

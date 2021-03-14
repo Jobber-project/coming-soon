@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import Portal from './Portal'
 
 const Wrapper = styled.div`
-  z-index: 2;
+  z-index: ${props => (props.$visible ? 2 : -1)};
   position: absolute;
   top: 0;
   right: 0;

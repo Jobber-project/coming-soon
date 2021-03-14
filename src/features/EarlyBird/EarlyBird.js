@@ -133,6 +133,7 @@ const Policy = styled.button`
   appearance: none;
   border: none;
   margin: 0;
+  padding: 0;
   width: auto;
   overflow: visible;
   background: transparent;
@@ -202,7 +203,7 @@ export default function EarlyBird() {
                 name="policy"
               />
               <Label htmlFor="checkbox" error={errors?.policy}>
-                Jag godkänner
+                Jag godkänner&nbsp;
               </Label>
               <Policy
                 id="privacy-policy"

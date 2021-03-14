@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import Portal from './Portal'
 
 const Wrapper = styled.div`
-  z-index: 1;
+  z-index: 2;
   position: absolute;
   top: 0;
   right: 0;
@@ -18,6 +18,7 @@ const Wrapper = styled.div`
   justify-content: center;
   visibility: ${props => (props.$visible ? 'visible' : 'hidden')};
   pointer-events: ${props => (props.$visible ? 'auto' : 'none')};
+  padding: 10px;
 `
 
 const Backdrop = styled.div`
@@ -33,6 +34,8 @@ const Backdrop = styled.div`
 const Container = styled.section`
   border-radius: 8px;
   background-color: white;
+  max-height: 100%;
+  box-sizing: border-box;
 `
 
 const Modal = React.forwardRef(({ labelledBy, className, children }, ref) => {

@@ -30,7 +30,7 @@ const Backdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 `
 
-const Container = styled.div`
+const Container = styled.section`
   border-radius: 8px;
   background-color: white;
 `

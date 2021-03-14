@@ -17,7 +17,7 @@ export default function IndexPage() {
     setHidePreload(true)
 
     const timeout = setTimeout(() => {
-      navigate('/earlybird')
+      navigate('/communitytalk')
     }, 10000)
 
     return () => {

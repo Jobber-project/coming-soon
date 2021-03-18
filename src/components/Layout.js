@@ -52,6 +52,8 @@ const Main = styled.main`
   position: relative;
   width: 100%;
   height: 100%;
+  padding-top: 62px;
+  box-sizing: border-box;
 `
 
 export default function Layout({ title, children }) {

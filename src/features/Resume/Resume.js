@@ -35,7 +35,11 @@ const Container = styled.div`
 `
 
 const ResumeCol = styled.div`
-  width: 60%;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 60%;
+  padding-right: 200px;
+  box-sizing: border-box;
 `
 
 const Figure = styled.figure`
@@ -51,7 +55,8 @@ const Figure = styled.figure`
 `
 
 const ContentCol = styled.div`
-  width: 40%;
+  flex-shrink: 0;
+  flex-basis: 40%;
 `
 
 export default function Resume() {

@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 const Img = styled.img`
-  width: ${p => (p.small ? 68 : 135)}px;
-  height: ${p => (p.small ? 68 : 135)}px;
+  width: ${p => (p.small ? 80 : 135)}px;
+  height: ${p => (p.small ? 80 : 135)}px;
   box-shadow: 15px 14px 28px 8px rgba(0, 0, 0, 0.25);
   border-radius: 50%;
   object-fit: cover;

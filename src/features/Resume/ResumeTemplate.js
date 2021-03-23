@@ -6,6 +6,7 @@ import AvatarImg from '../../images/avatar.png'
 
 const Container = styled.div`
   padding: 25px;
+  padding-bottom: ${props => props.theme.container.padding}px;
   box-sizing: border-box;
   border-radius: 20px;
   background-color: white;
@@ -264,6 +265,9 @@ const THEMES = {
       paragraph: '#2b2a35',
       line: '#000000',
     },
+    container: {
+      padding: 25,
+    },
     profile: {
       horizontal: false,
       margin: 2,
@@ -278,6 +282,9 @@ const THEMES = {
       subtitle: '#2b2a35',
       paragraph: '#2b2a35',
       line: '#354ebd',
+    },
+    container: {
+      padding: 50,
     },
     profile: {
       horizontal: true,

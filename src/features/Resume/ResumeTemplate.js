@@ -173,6 +173,28 @@ const Time = styled.span`
   line-height: 1.25em;
 `
 
+const SkillsRow = styled.div`
+  display: flex;
+  margin: 0 -15px;
+`
+
+const SkillsCol = styled.div`
+  display: flex;
+  padding: 0 15px;
+  flex-grow: 1;
+  flex-direction: column;
+
+  & ${Paragraph} + ${Paragraph} {
+    padding-top: 3px;
+  }
+`
+
+const SpecialSkill = styled(Paragraph)`
+  padding-top: 0 !important;
+  font-weight: 500;
+  font-size: 6px;
+`
+
 export default function ResumeTemplate() {
   return (
     <Container>
@@ -314,6 +336,7 @@ export default function ResumeTemplate() {
               </SectionCol>
             </SectionRow>
           </Section>
+          {/* Kunskaper */}
           <Section>
             <SectionRow>
               <SectionCol>
@@ -325,7 +348,29 @@ export default function ResumeTemplate() {
             </SectionRow>
             <SectionRow>
               <SectionCol />
-              <SectionCol>todo</SectionCol>
+              <SectionCol>
+                <SkillsRow>
+                  <SkillsCol>
+                    <ParagraphTitle>Språk</ParagraphTitle>
+                    <Paragraph>Svenska</Paragraph>
+                    <Paragraph>Engelska</Paragraph>
+                    <Paragraph>Franska</Paragraph>
+                    <SpecialSkill>Modersmål</SpecialSkill>
+                  </SkillsCol>
+                  <SkillsCol>
+                    <ParagraphTitle>Program &amp; datorkunskap</ParagraphTitle>
+                    <Paragraph>Microsoft Word</Paragraph>
+                    <Paragraph>Microsoft Powerpoint</Paragraph>
+                    <Paragraph>AutoCad 3D</Paragraph>
+                  </SkillsCol>
+                  <SkillsCol>
+                    <ParagraphTitle>Övrigt</ParagraphTitle>
+                    <Paragraph>Truckkort</Paragraph>
+                    <Paragraph>Svetsar-certifikat</Paragraph>
+                    <Paragraph>B-körkort</Paragraph>
+                  </SkillsCol>
+                </SkillsRow>
+              </SectionCol>
             </SectionRow>
           </Section>
         </OuterLeft>

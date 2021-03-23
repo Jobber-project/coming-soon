@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { ThemeProvider } from 'styled-components'
 
@@ -296,13 +296,7 @@ const THEMES = {
   },
 }
 
-export default function ResumeTemplate() {
-  const [themeName, setThemeName] = useState('secondary')
-
-  function handleClick() {
-    setThemeName(prev => (prev === 'primary' ? 'secondary' : 'primary'))
-  }
-
+export default function ResumeTemplate({ themeName }) {
   const theme = THEMES[themeName]
 
   return (
@@ -487,9 +481,14 @@ export default function ResumeTemplate() {
           </OuterRight>
         </OuterRow>
       </Container>
-      <button type="button" onClick={handleClick}>
-        Switch theme
-      </button>
     </ThemeProvider>
   )
+}
+
+ResumeTemplate.propTypes = {
+  themeName: PropTypes.oneOf(['primary', 'secondary']),
+}
+
+ResumeTemplate.defaultProps = {
+  themeName: 'primary',
 }

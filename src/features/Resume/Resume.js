@@ -2,8 +2,9 @@ import React from 'react'
 import styled, { keyframes } from 'styled-components'
 
 import Punchline from '../../components/Punchline'
-import ResumeModelOne from '../../svg/cv-model-one.svg'
 import { EASING } from '../app/constants'
+
+import ResumeTemplate from './ResumeTemplate'
 
 const slideInFromLeft = keyframes`
   0% {
@@ -43,15 +44,11 @@ const ResumeCol = styled.div`
 `
 
 const Figure = styled.figure`
+  max-width: 450px;
   opacity: 0;
   transform: translateX(-100%);
   animation: ${slideInFromLeft} 2200ms ${EASING.easeOutExpo} forwards,
     ${fadeIn} 900ms 200ms linear forwards;
-
-  & svg {
-    width: 100%;
-    max-width: 450px;
-  }
 `
 
 const ContentCol = styled.div`
@@ -64,7 +61,7 @@ export default function Resume() {
     <Container>
       <ResumeCol>
         <Figure>
-          <ResumeModelOne />
+          <ResumeTemplate />
         </Figure>
       </ResumeCol>
       <ContentCol>

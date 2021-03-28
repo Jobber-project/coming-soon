@@ -4,6 +4,7 @@ import styled, { keyframes } from 'styled-components'
 import Punchline from '../../components/Punchline'
 import { EASING } from '../app/constants'
 
+import Generator from './Generator'
 import ResumeTemplate from './ResumeTemplate'
 
 const slideInFromLeft = keyframes`
@@ -56,12 +57,31 @@ const ContentCol = styled.div`
   flex-basis: 40%;
 `
 
+const ResumeTemplateWrapper = styled.div`
+  z-index: 1;
+  position: relative;
+`
+
+const GeneratorWrapper = styled.div`
+  z-index: 1;
+  position: absolute;
+  top: 70px;
+  left: 100%;
+  width: 130px;
+  margin-left: -20px;
+`
+
 export default function Resume() {
   return (
     <Container>
       <ResumeCol>
         <Figure>
-          <ResumeTemplate />
+          <ResumeTemplateWrapper>
+            <ResumeTemplate />
+            <GeneratorWrapper>
+              <Generator />
+            </GeneratorWrapper>
+          </ResumeTemplateWrapper>
         </Figure>
       </ResumeCol>
       <ContentCol>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 
 import Punchline from '../../components/Punchline'
@@ -36,11 +36,15 @@ const Container = styled.div`
   min-height: 100%;
 `
 
+const Row = styled.div`
+  display: flex;
+`
+
 const ResumeCol = styled.div`
   flex-grow: 1;
   flex-shrink: 1;
-  flex-basis: 60%;
-  padding-right: 200px;
+  flex-basis: 50%;
+  padding: 0 15px;
   box-sizing: border-box;
 `
 
@@ -53,8 +57,11 @@ const Figure = styled.figure`
 `
 
 const ContentCol = styled.div`
+  display: flex;
   flex-shrink: 0;
-  flex-basis: 40%;
+  flex-basis: 50%;
+  padding: 0 15px;
+  box-sizing: border-box;
 `
 
 const ResumeTemplateWrapper = styled.div`
@@ -72,25 +79,30 @@ const GeneratorWrapper = styled.div`
 `
 
 export default function Resume() {
+  const [theme, setTheme] = useState('primary')
+
   return (
     <Container>
-      <ResumeCol>
-        <Figure>
-          <ResumeTemplateWrapper>
-            <ResumeTemplate />
-            <GeneratorWrapper>
-              <Generator />
-            </GeneratorWrapper>
-          </ResumeTemplateWrapper>
-        </Figure>
-      </ResumeCol>
-      <ContentCol>
-        <Punchline
-          title="RUBRIK"
-          header="Punchline"
-          paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Molestie viverra sapien accumsan, feugiat."
-        />
-      </ContentCol>
+      <Row>
+        <ResumeCol>
+          <Figure>
+            <ResumeTemplateWrapper>
+              <ResumeTemplate themeName={theme} />
+              <GeneratorWrapper>
+                <Generator onAnimationComplete={() => setTheme('secondary')} />
+              </GeneratorWrapper>
+            </ResumeTemplateWrapper>
+          </Figure>
+        </ResumeCol>
+        <ContentCol>
+          <Punchline
+            title="CV"
+            header="Enkelt, snabbt & smidigt"
+            paragraph="Är du också trött på att det alltid skall krångel med att skriva ett CV? 😤 Vi med.
+          Med Jobelos CV-generator får du istället fokusera på det som är viktigt, att nå ditt nästa jobb."
+          />
+        </ContentCol>
+      </Row>
     </Container>
   )
 }

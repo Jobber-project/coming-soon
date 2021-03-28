@@ -1,12 +1,101 @@
 import React from 'react'
-import styled from 'styled-components'
+import PropTypes from 'prop-types'
+import styled, { keyframes } from 'styled-components'
+
+const flip = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) rotateY(180deg);
+  }
+  
+  50% {
+    opacity: 1;
+  }
+  
+  100% {
+    opacity: 1;
+    transform: translateX(0%) rotateY(0deg);
+  }
+`
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+`
+
+const translate = keyframes`
+  0% {
+    transform: translate(30px, 20px) rotate(-28.39deg);
+  }
+
+  100% {
+    transform: translate(0px, 0px) rotate(-28.39deg);
+  }
+`
+
+const press = keyframes`
+  0% {
+    transform: translateY(0px) rotate(-28.39deg);
+  }
+  
+  50% {
+    transform: translateY(5px) rotate(-28.39deg);
+  }
+  
+  100% {
+    transform: translateY(0px) rotate(-28.39deg);
+  }
+`
+
+const background = keyframes`
+  0% {
+    background-color: #354ebd;
+  }
+  
+  50% {
+    background-color: #3046ab
+  }
+
+  100% {
+    background-color: #354ebd;
+  }
+`
 
 const Container = styled.div`
+  z-index: 1;
+  position: relative;
   width: 100%;
   max-width: 130px;
   background-color: white;
   border-radius: 20px;
+  opacity: 0;
   box-shadow: 15px 14px 28px 8px rgba(0, 0, 0, 0.25);
+  transform: translateX(-50%) rotateY(180deg);
+  transform-style: preserve-3d;
+  animation: ${flip} 800ms 2s ease-out forwards;
+
+  &::before,
+  &::after {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 20px;
+    background-color: white;
+  }
+
+  &::after {
+    background-color: white;
+    transform: translateZ(-1px);
+  }
 `
 
 const Content = styled.div`
@@ -56,6 +145,7 @@ const Button = styled.div`
   text-transform: uppercase;
   color: white;
   cursor: default;
+  animation: ${background} 280ms 4s ease forwards;
 `
 
 const Hand = styled.div`
@@ -65,11 +155,14 @@ const Hand = styled.div`
   right: 30px;
   font-size: 4.88rem;
   line-height: 1em;
+  opacity: 0;
   text-shadow: -5px 3px 8px rgba(0, 0, 0, 0.25);
-  transform: rotate(-28.39deg);
+  transform: translate(30px, 20px) rotate(-28.39deg);
+  animation: ${fadeIn} 300ms 3s linear forwards,
+    ${translate} 800ms 3s ease-out forwards, ${press} 200ms 4s linear forwards;
 `
 
-export default function Generator() {
+export default function Generator({ onAnimationComplete }) {
   return (
     <Container>
       <Content>
@@ -79,9 +172,13 @@ export default function Generator() {
         </Paragraph>
       </Content>
       <ButtonWrapper>
-        <Button>Byt</Button>
+        <Button onAnimationEnd={onAnimationComplete}>Byt</Button>
         <Hand>👆🏼</Hand>
       </ButtonWrapper>
     </Container>
   )
+}
+
+Generator.propTypes = {
+  onAnimationComplete: PropTypes.func.isRequired,
 }

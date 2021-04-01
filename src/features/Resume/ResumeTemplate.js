@@ -284,7 +284,7 @@ const THEMES = {
       line: '#354ebd',
     },
     container: {
-      padding: 50,
+      padding: 60,
     },
     profile: {
       horizontal: true,

@@ -1,6 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useRef, useState } from 'react'
 import PropTypes from 'prop-types'
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes, css } from 'styled-components'
+
+import AvatarOne from '../../images/feedback-avatar-one.png'
+import AvatarTwo from '../../images/feedback-avatar-two.png'
+import AvatarThree from '../../images/feedback-avatar-three.png'
+import Checkmark from '../../svg/checkmark.svg'
 
 const flip = keyframes`
   0% {
@@ -76,6 +81,30 @@ const pressInvite = keyframes`
   }
 `
 
+const moveToCheck = keyframes`
+  0% {
+    transform: translate(20px, 10px) rotate(-28.39deg);
+  }
+  
+  100% {
+    transform: translate(50px, 10px) rotate(0deg);
+  }
+  `
+
+const pressCheck = keyframes`
+  0% {
+    transform: translate(50px, 10px);
+  }
+  
+  50% {
+    transform: translate(50px, 15px);
+  }
+
+  0% {
+    transform: translate(50px, 10px);
+  }
+`
+
 const background = keyframes`
   0% {
     background-color: #354ebd;
@@ -90,9 +119,44 @@ const background = keyframes`
   }
 `
 
+const shrink = keyframes`
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  25% {
+    opacity: 0.75;
+    transform: scale(1.25);
+  }
+  
+  50% {
+    transform: scale(0.5);
+  }
+  
+  75% {
+    opacity: 0.25;
+    transform: scale(0.25);
+  }
+  
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+`
+
 const Container = styled.div`
   z-index: 1;
   position: relative;
+  opacity: 1;
+  transform: scale(1);
+  transform-origin: bottom left;
+  animation: ${props =>
+    props.$hide
+      ? css`
+          ${shrink} 500ms 800ms ease-out forwards
+        `
+      : 'none'};
 `
 
 const Inner = styled.div`
@@ -204,6 +268,72 @@ const FeedbackHand = styled(Hand)`
     ${pressInvite} 200ms 1500ms linear forwards;
 `
 
+const InviteHand = styled(FeedbackHand)`
+  opacity: ${props => (props.$hide ? 0 : 1)};
+  transform: translate(20px, 10px) rotate(-28.39deg);
+  transition: opacity 400ms 800ms ease-out;
+  animation: ${moveToCheck} 600ms 2s ease-out forwards,
+    ${pressCheck} 200ms 2500ms linear forwards;
+`
+
+const Invite = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 15px 18px;
+`
+
+const Avatars = styled.div`
+  display: flex;
+`
+
+const Avatar = styled.img`
+  z-index: 1;
+  position: relative;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  overflow: hidden;
+  object-fit: cover;
+
+  & + & {
+    margin-left: -7px;
+  }
+`
+
+const Check = styled.div`
+  z-index: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  background-color: ${props => (props.$checked ? '#56bd66' : '#c4c4c4')};
+  transition: background-color 500ms ease-out;
+
+  &::before {
+    content: '';
+    z-index: 1;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    bottom: 1px;
+    left: 1px;
+    display: ${props => (props.$checked ? 'none' : 'block')};
+    border-radius: 3px;
+    background-color: white;
+    overflow: hidden;
+  }
+
+  & svg {
+    opacity: ${props => (props.$checked ? 1 : 0)};
+    transform: rotate(${props => (props.$checked ? 0 : -20)}deg);
+    transition: opacity 450ms, transform 300ms 300ms;
+  }
+`
+
 const STEP = {
   generator: 'generator',
   feedback: 'feedback',
@@ -212,13 +342,31 @@ const STEP = {
 
 export default function Generator({ onAnimationComplete }) {
   const [step, setStep] = useState(STEP.generator)
+  const [invited, setInvited] = useState(false)
+
+  const inviteAnimIteration = useRef(0)
 
   function handleAnimationEnd() {
-    if (step === STEP.generator) {
-      setStep(STEP.feedback)
-      onAnimationComplete()
-    } else if (step === STEP.feedback) {
-      setStep(STEP.invite)
+    switch (step) {
+      case STEP.generator:
+        setStep(STEP.feedback)
+        onAnimationComplete()
+        break
+
+      case STEP.feedback:
+        setStep(STEP.invite)
+        break
+
+      case STEP.invite:
+        if (inviteAnimIteration.current === 1) {
+          setInvited(true)
+        } else {
+          inviteAnimIteration.current += 1
+        }
+        break
+
+      default:
+        break
     }
   }
 
@@ -258,38 +406,59 @@ export default function Generator({ onAnimationComplete }) {
   const generator = step === STEP.generator
 
   return (
-    <Container>
+    <Container $hide={invited}>
       <Inner key={generator} $generator={generator}>
         <Content>
           <Title>{title()}</Title>
           <Paragraph>{paragraph()}</Paragraph>
         </Content>
-        <ButtonWrapper>
-          {(() => {
-            switch (step) {
-              case STEP.feedback:
-              case STEP.invite:
-                return (
+        {(() => {
+          switch (step) {
+            case STEP.feedback:
+              return (
+                <ButtonWrapper>
                   <FeedbackButton onAnimationEnd={handleAnimationEnd}>
                     {button()}
                   </FeedbackButton>
-                )
+                </ButtonWrapper>
+              )
 
-              default:
-                return (
+            case STEP.invite:
+              return (
+                <Invite>
+                  <Avatars>
+                    <Avatar src={AvatarOne} />
+                    <Avatar src={AvatarTwo} />
+                    <Avatar src={AvatarThree} />
+                  </Avatars>
+                  <Check $checked={invited}>
+                    <Checkmark />
+                  </Check>
+                </Invite>
+              )
+
+            default:
+              return (
+                <ButtonWrapper>
                   <Button onAnimationEnd={handleAnimationEnd}>
                     {button()}
                   </Button>
-                )
-            }
-          })()}
-        </ButtonWrapper>
+                </ButtonWrapper>
+              )
+          }
+        })()}
       </Inner>
       {(() => {
         switch (step) {
           case STEP.feedback:
-          case STEP.invite:
             return <FeedbackHand>👆🏼</FeedbackHand>
+
+          case STEP.invite:
+            return (
+              <InviteHand $hide={invited} onAnimationEnd={handleAnimationEnd}>
+                👆🏼
+              </InviteHand>
+            )
 
           default:
             return <Hand>👆🏼</Hand>

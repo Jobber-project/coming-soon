@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled, { keyframes } from 'styled-components'
 
@@ -28,7 +28,7 @@ const fadeIn = keyframes`
   }
 `
 
-const translate = keyframes`
+const moveToGeneratorButton = keyframes`
   0% {
     transform: translate(30px, 20px) rotate(-28.39deg);
   }
@@ -38,7 +38,17 @@ const translate = keyframes`
   }
 `
 
-const press = keyframes`
+const moveToInviteButton = keyframes`
+  0% {
+    transform: translate(0px, 0px) rotate(-28.39deg);
+  }
+
+  100% {
+    transform: translate(20px, 10px) rotate(-28.39deg);
+  }
+`
+
+const pressGenerate = keyframes`
   0% {
     transform: translateY(0px) rotate(-28.39deg);
   }
@@ -49,6 +59,20 @@ const press = keyframes`
   
   100% {
     transform: translateY(0px) rotate(-28.39deg);
+  }
+`
+
+const pressInvite = keyframes`
+  0% {
+    transform: translate(20px, 10px) translateY(0px) rotate(-28.39deg);
+  }
+  
+  50% {
+    transform: translate(20px, 10px) translateY(5px) rotate(-28.39deg);
+  }
+  
+  100% {
+    transform: translate(20px, 10px) translateY(0px) rotate(-28.39deg);
   }
 `
 
@@ -69,6 +93,11 @@ const background = keyframes`
 const Container = styled.div`
   z-index: 1;
   position: relative;
+`
+
+const Inner = styled.div`
+  z-index: 1;
+  position: relative;
   width: 100%;
   max-width: 130px;
   background-color: white;
@@ -77,7 +106,8 @@ const Container = styled.div`
   box-shadow: 15px 14px 28px 8px rgba(0, 0, 0, 0.25);
   transform: translateX(-50%) rotateY(180deg);
   transform-style: preserve-3d;
-  animation: ${flip} 800ms 2s ease-out forwards;
+  animation: ${flip} 800ms ${props => (props.$generator ? 2 : 0)}s ease-out
+    forwards;
 
   &::before,
   &::after {
@@ -148,33 +178,123 @@ const Button = styled.div`
   animation: ${background} 280ms 4s ease forwards;
 `
 
+const FeedbackButton = styled(Button)`
+  animation: ${background} 280ms 1500ms ease forwards;
+`
+
 const Hand = styled.div`
   z-index: 1;
   position: absolute;
-  top: 20px;
-  right: 30px;
+  bottom: -10px;
+  left: 40px;
   font-size: 4.88rem;
   line-height: 1em;
   opacity: 0;
   text-shadow: -5px 3px 8px rgba(0, 0, 0, 0.25);
   transform: translate(30px, 20px) rotate(-28.39deg);
   animation: ${fadeIn} 300ms 3s linear forwards,
-    ${translate} 800ms 3s ease-out forwards, ${press} 200ms 4s linear forwards;
+    ${moveToGeneratorButton} 800ms 3s ease-out forwards,
+    ${pressGenerate} 200ms 4s linear forwards;
 `
 
+const FeedbackHand = styled(Hand)`
+  opacity: 1;
+  transform: translate(0px, 0px) rotate(-28.39deg);
+  animation: ${moveToInviteButton} 400ms 1s ease-out forwards,
+    ${pressInvite} 200ms 1500ms linear forwards;
+`
+
+const STEP = {
+  generator: 'generator',
+  feedback: 'feedback',
+  invite: 'invite',
+}
+
 export default function Generator({ onAnimationComplete }) {
+  const [step, setStep] = useState(STEP.generator)
+
+  function handleAnimationEnd() {
+    if (step === STEP.generator) {
+      setStep(STEP.feedback)
+      onAnimationComplete()
+    } else if (step === STEP.feedback) {
+      setStep(STEP.invite)
+    }
+  }
+
+  function title() {
+    switch (step) {
+      case STEP.feedback:
+      case STEP.invite:
+        return 'Feedback'
+
+      default:
+        return 'Generator'
+    }
+  }
+
+  function paragraph() {
+    switch (step) {
+      case STEP.feedback:
+      case STEP.invite:
+        return 'Få respons av vänner & famlj direkt i CV:et'
+
+      default:
+        return 'Välj bland flera olika mallar & få fram din egna prägel'
+    }
+  }
+
+  function button() {
+    switch (step) {
+      case STEP.feedback:
+      case STEP.invite:
+        return 'Bjud in'
+
+      default:
+        return 'Byt'
+    }
+  }
+
+  const generator = step === STEP.generator
+
   return (
     <Container>
-      <Content>
-        <Title>Generator</Title>
-        <Paragraph>
-          Välj bland flera olika mallar & få fram din egna prägel
-        </Paragraph>
-      </Content>
-      <ButtonWrapper>
-        <Button onAnimationEnd={onAnimationComplete}>Byt</Button>
-        <Hand>👆🏼</Hand>
-      </ButtonWrapper>
+      <Inner key={generator} $generator={generator}>
+        <Content>
+          <Title>{title()}</Title>
+          <Paragraph>{paragraph()}</Paragraph>
+        </Content>
+        <ButtonWrapper>
+          {(() => {
+            switch (step) {
+              case STEP.feedback:
+              case STEP.invite:
+                return (
+                  <FeedbackButton onAnimationEnd={handleAnimationEnd}>
+                    {button()}
+                  </FeedbackButton>
+                )
+
+              default:
+                return (
+                  <Button onAnimationEnd={handleAnimationEnd}>
+                    {button()}
+                  </Button>
+                )
+            }
+          })()}
+        </ButtonWrapper>
+      </Inner>
+      {(() => {
+        switch (step) {
+          case STEP.feedback:
+          case STEP.invite:
+            return <FeedbackHand>👆🏼</FeedbackHand>
+
+          default:
+            return <Hand>👆🏼</Hand>
+        }
+      })()}
     </Container>
   )
 }

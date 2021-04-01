@@ -148,6 +148,7 @@ const shrink = keyframes`
 const Container = styled.div`
   z-index: 1;
   position: relative;
+  display: none;
   opacity: 1;
   transform: scale(1);
   transform-origin: bottom left;
@@ -157,6 +158,10 @@ const Container = styled.div`
           ${shrink} 500ms 800ms ease-out forwards
         `
       : 'none'};
+
+  @media (min-width: 900px) {
+    display: block;
+  }
 `
 
 const Inner = styled.div`

@@ -38,14 +38,25 @@ const Container = styled.div`
 
 const Row = styled.div`
   display: flex;
+  flex-direction: column;
+
+  @media (min-width: 800px) {
+    flex-direction: row;
+  }
 `
 
 const ResumeCol = styled.div`
+  display: flex;
+  justify-content: center;
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: 50%;
   padding: 0 15px;
   box-sizing: border-box;
+
+  @media (min-width: 800px) {
+    justify-content: flex-start;
+  }
 `
 
 const Figure = styled.figure`

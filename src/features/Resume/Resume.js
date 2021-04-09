@@ -4,6 +4,7 @@ import styled, { keyframes } from 'styled-components'
 import Punchline from '../../components/Punchline'
 import { EASING } from '../app/constants'
 
+import Feedbackers from './Feedbackers'
 import Generator from './Generator'
 import ResumeTemplate from './ResumeTemplate'
 
@@ -106,8 +107,19 @@ const GeneratorWrapper = styled.div`
   margin-left: -20px;
 `
 
+const StyledFeedbackers = styled(Feedbackers)`
+  z-index: 1;
+  position: absolute;
+  top: 120px;
+  left: 100%;
+  min-width: 276px;
+  min-width: max-width;
+  transform: translateX(-24px);
+`
+
 export default function Resume() {
   const [didChangeTheme, setDidChangeTheme] = useState(false)
+  const [didRequestFeedback, setDidRequestFeedback] = useState(false)
 
   return (
     <Container>
@@ -124,9 +136,12 @@ export default function Resume() {
               )}
               <GeneratorWrapper>
                 <Generator
-                  onAnimationComplete={() => setDidChangeTheme(true)}
+                  onChangeTheme={() => setDidChangeTheme(true)}
+                  onRequestFeedback={() => setDidRequestFeedback(true)}
                 />
               </GeneratorWrapper>
+              {/* {didRequestFeedback && <StyledFeedbackers />} */}
+              <StyledFeedbackers />
             </ResumeTemplateWrapper>
           </Figure>
         </ResumeCol>

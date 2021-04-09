@@ -345,7 +345,7 @@ const STEP = {
   invite: 'invite',
 }
 
-export default function Generator({ onAnimationComplete }) {
+export default function Generator({ onChangeTheme, onRequestFeedback }) {
   const [step, setStep] = useState(STEP.generator)
   const [invited, setInvited] = useState(false)
 
@@ -355,7 +355,7 @@ export default function Generator({ onAnimationComplete }) {
     switch (step) {
       case STEP.generator:
         setStep(STEP.feedback)
-        onAnimationComplete()
+        onChangeTheme()
         break
 
       case STEP.feedback:
@@ -368,6 +368,11 @@ export default function Generator({ onAnimationComplete }) {
         } else {
           inviteAnimIteration.current += 1
         }
+
+        if (inviteAnimIteration.current === 2) {
+          onRequestFeedback()
+        }
+
         break
 
       default:
@@ -474,5 +479,6 @@ export default function Generator({ onAnimationComplete }) {
 }
 
 Generator.propTypes = {
-  onAnimationComplete: PropTypes.func.isRequired,
+  onChangeTheme: PropTypes.func.isRequired,
+  onRequestFeedback: PropTypes.func.isRequired,
 }

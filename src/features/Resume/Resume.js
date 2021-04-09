@@ -80,6 +80,23 @@ const ResumeTemplateWrapper = styled.div`
   position: relative;
 `
 
+const PrimaryResumeTemplate = styled(ResumeTemplate)`
+  z-index: 1;
+  opacity: ${props => (props.$hidden ? 0 : 1)};
+  transition: opacity 500m ease forwards;
+`
+
+const SecondaryResumeTemplate = styled(ResumeTemplate)`
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  animation: ${fadeIn} 500ms ease forwards;
+`
+
 const GeneratorWrapper = styled.div`
   z-index: 1;
   position: absolute;
@@ -90,7 +107,7 @@ const GeneratorWrapper = styled.div`
 `
 
 export default function Resume() {
-  const [theme, setTheme] = useState('primary')
+  const [didChangeTheme, setDidChangeTheme] = useState(false)
 
   return (
     <Container>
@@ -98,9 +115,17 @@ export default function Resume() {
         <ResumeCol>
           <Figure>
             <ResumeTemplateWrapper>
-              <ResumeTemplate themeName={theme} />
+              <PrimaryResumeTemplate
+                $hidden={didChangeTheme}
+                themeName="primary"
+              />
+              {didChangeTheme && (
+                <SecondaryResumeTemplate themeName="secondary" />
+              )}
               <GeneratorWrapper>
-                <Generator onAnimationComplete={() => setTheme('secondary')} />
+                <Generator
+                  onAnimationComplete={() => setDidChangeTheme(true)}
+                />
               </GeneratorWrapper>
             </ResumeTemplateWrapper>
           </Figure>

@@ -296,12 +296,12 @@ const THEMES = {
   },
 }
 
-export default function ResumeTemplate({ themeName }) {
+export default function ResumeTemplate({ className, themeName }) {
   const theme = THEMES[themeName]
 
   return (
     <ThemeProvider theme={theme}>
-      <Container>
+      <Container className={className}>
         <OuterRow>
           <OuterLeft>
             <ProfileComponent horizontal={theme.profile.horizontal} />
@@ -486,9 +486,11 @@ export default function ResumeTemplate({ themeName }) {
 }
 
 ResumeTemplate.propTypes = {
+  className: PropTypes.string,
   themeName: PropTypes.oneOf(['primary', 'secondary']),
 }
 
 ResumeTemplate.defaultProps = {
+  className: undefined,
   themeName: 'primary',
 }

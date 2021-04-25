@@ -7,7 +7,7 @@ import Punchline from '../../components/Punchline'
 
 import PrivacyPolicyModal from './PrivacyPolicyModal'
 
-const TITLE = 'JOBELO'
+const TITLE = 'JOBELLO'
 const PARAGRAPH =
   'Lansering är nära! Vill du vara redo när det händer? Skriv in e-mail nedan och starta klockan i gröna knappen så sköter magin resten! 😎'
 const TRANSITION = 500

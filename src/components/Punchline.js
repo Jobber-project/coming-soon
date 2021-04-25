@@ -91,7 +91,7 @@ Punchline.propTypes = {
 }
 
 Punchline.defaultProps = {
-  title: 'JOBELO',
+  title: 'JOBELLO',
   header: '',
   paragraph:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Molestie viverra sapien accumsan, feugiat.',

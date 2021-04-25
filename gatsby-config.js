@@ -5,8 +5,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'Jobelo',
-        short_name: 'Jobelo',
+        name: 'Jobello',
+        short_name: 'Jobello',
         start_url: '/',
         background_color: '#f7f0eb',
         theme_color: '#a2466c',
@@ -23,7 +23,7 @@ module.exports = {
         respectDNT: true,
         pageTransitionDelay: 0,
         defer: true,
-        cookieDomain: 'jobelo.se',
+        cookieDomain: 'jobello.se',
       },
     },
     'gatsby-plugin-react-helmet',

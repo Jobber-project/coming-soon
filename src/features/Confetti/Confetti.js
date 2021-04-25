@@ -7,7 +7,7 @@ import Punchline from '../../components/Punchline'
 const TITLE = 'JOBELO'
 const HEADER = 'Du hittade till Sveriges första sociala jobbsajt🤩'
 const PARAGRAPH =
-  'Jobelo är platsen där du kan skapa ett CV i världsklass, söka bland Sveriges alla jobbannonser och diskutera yrkesfrågor som hur man nailar arbetsintervjun, hittar drömjobbet, löneförhandlar eller planerar den årliga firmafesten med mycket mer! Självklart är allt helt gratis. Häng på! 😃'
+  'Jobello är platsen där du kan skapa ett CV i världsklass, söka bland Sveriges alla jobbannonser och diskutera yrkesfrågor som hur man nailar arbetsintervjun, hittar drömjobbet, löneförhandlar eller planerar den årliga firmafesten med mycket mer! Självklart är allt helt gratis. Häng på! 😃'
 const TRANSITION = 500
 
 const fadeIn = keyframes`

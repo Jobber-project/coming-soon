@@ -26,7 +26,7 @@ export default function IndexPage() {
   }, [])
 
   return (
-    <Layout title="Jobelo">
+    <Layout title="Jobello">
       <Welcome />
       <Preloader hidden={hidePreload}>
         <Link to="/earlybird" rel="preload">

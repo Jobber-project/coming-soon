@@ -4,7 +4,7 @@ import Confetti from 'react-dom-confetti'
 
 import Punchline from '../../components/Punchline'
 
-const TITLE = 'JOBELO'
+const TITLE = 'JOBELLO'
 const HEADER =
   'Du hittade till Sveriges första sociala jobbsajt för yrkesarbetare - välkommen! 🤩'
 const PARAGRAPH =

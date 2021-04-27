@@ -9,7 +9,7 @@ import Modal from './Modal'
 
 const TITLE = 'JOBELO'
 const PARAGRAPH =
-  'Lansering är nära! Vill du vara redo när det händer? Skriv in e-mail nedan och starta klockan i gröna knappen så sköter magin resten! 😎'
+  'Lansering är nära! Vill du vara redo när det händer? Skriv in e-mail nedan och starta klockan i gröna knappen så hör vi oss när det är dags. 😎'
 const TRANSITION = 500
 
 const fadeIn = keyframes`
@@ -204,7 +204,7 @@ export default function EarlyBird() {
 
             <Button>
               <ButtonText>
-                {signup ? 'Tack!' : 'Följ oss redan idag!'}
+                {signup ? 'Hörs snart! ⏰' : 'Följ oss redan idag!'}
               </ButtonText>
             </Button>
           </Form>

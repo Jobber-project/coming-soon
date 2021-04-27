@@ -5,9 +5,10 @@ import Confetti from 'react-dom-confetti'
 import Punchline from '../../components/Punchline'
 
 const TITLE = 'JOBELO'
-const HEADER = 'Du hittade till Sveriges första sociala jobbsajt🤩'
+const HEADER =
+  'Du hittade till Sveriges första sociala jobbsajt för yrkesarbetare - välkommen! 🤩'
 const PARAGRAPH =
-  'Jobelo är platsen där du kan skapa ett CV i världsklass, söka bland Sveriges alla jobbannonser och diskutera yrkesfrågor som hur man nailar arbetsintervjun, hittar drömjobbet, löneförhandlar eller planerar den årliga firmafesten med mycket mer! Självklart är allt helt gratis. Häng på! 😃'
+  'Här kommer du kunna skapa ett CV i världsklass, nätverka med andra och söka bland Sveriges alla jobbannonser på ett nytt smart sätt. Självklart kommer allt att vara helt gratis. Häng på! 😃'
 const TRANSITION = 500
 
 const fadeIn = keyframes`

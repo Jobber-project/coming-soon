@@ -109,7 +109,7 @@ export default function Layout({ title, children }) {
           </Link>
         </LogoWrapper>
         <LogoWrapper>
-          <Link to="http://beta.jobello.se/">
+          <Link to="http://dev.jobello.se/">
             <Button>
               <ButtonText>Maria, testa beta här!</ButtonText>
             </Button>

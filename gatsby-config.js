@@ -28,5 +28,20 @@ module.exports = {
     },
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-no-index',
+    'gatsby-plugin-portal',
+    {
+      resolve: 'gatsby-plugin-react-svg',
+      options: {
+        rule: {
+          include: /svg\/.*\.svg$/,
+        },
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-apollo',
+      options: {
+        uri: 'https://dev-jobber-api-l.azurewebsites.net/graphql',
+      },
+    },
   ],
 }

@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { useForm } from 'react-hook-form'
 import { gql, useMutation } from '@apollo/client'
 
 import Punchline from '../../components/Punchline'
 
-import Modal from './Modal'
+import PrivacyPolicyModal from './PrivacyPolicyModal'
 
 const TITLE = 'JOBELLO'
 const PARAGRAPH =
@@ -129,9 +129,20 @@ const Error = styled.div`
   padding-bottom: 8px;
 `
 
-const Policy = styled.span`
-  color: inherit;
-  margin-left: 5px;
+const Policy = styled.button`
+  appearance: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  font: inherit;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+
+  display: inline-block;
+  color: ${props => (props.error ? 'red' : 'white')};
   text-decoration: underline;
   cursor: pointer;
 `
@@ -144,13 +155,10 @@ const CREATE_EARLYBIRD = gql`
 
 export default function EarlyBird() {
   const { register, handleSubmit, errors } = useForm()
-  const [visible, setVisible] = useState(false)
   const [createUser] = useMutation(CREATE_EARLYBIRD)
   const [signup, setSignup] = useState('')
 
-  function toggle() {
-    setVisible(!visible)
-  }
+  const modalRef = useRef(null)
 
   async function handleEarlyBird({ email }) {
     if (signup === email) return
@@ -195,11 +203,16 @@ export default function EarlyBird() {
                 name="policy"
               />
               <Label htmlFor="checkbox" error={errors?.policy}>
-                Jag godkänner
-                <Policy error={errors?.policy} onClick={toggle}>
-                  villkoren
-                </Policy>
+                Jag godkänner&nbsp;
               </Label>
+              <Policy
+                id="privacy-policy"
+                type="button"
+                error={errors?.policy}
+                onClick={() => modalRef.current?.toggle?.()}
+              >
+                villkoren
+              </Policy>
             </CheckboxWrapper>
 
             <Button>
@@ -210,7 +223,7 @@ export default function EarlyBird() {
           </Form>
         </Punchline>
       </Wrapper>
-      <Modal isVisible={visible} toggle={toggle} />
+      <PrivacyPolicyModal ref={modalRef} />
     </Box>
   )
 }

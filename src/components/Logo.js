@@ -1,7 +1,7 @@
 import React from 'react'
 
-import LogoImg from '../images/jobelo-logo.svg'
+import LogoImg from '../images/jobello-logo.svg'
 
 export default function Logo() {
-  return <img src={LogoImg} alt="Jobelo logo" />
+  return <img src={LogoImg} alt="Jobello logo" />
 }

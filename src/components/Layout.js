@@ -2,11 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
-import { ApolloProvider } from '@apollo/client'
 import styled, { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
-
-import client from '../features/graphql/client'
 
 import Background from './Background'
 import Logo from './Logo'
@@ -92,7 +89,7 @@ const Main = styled.main`
 
 export default function Layout({ title, children }) {
   return (
-    <ApolloProvider client={client}>
+    <>
       <Helmet title={title}>
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
@@ -119,7 +116,7 @@ export default function Layout({ title, children }) {
         {children}
         <Background />
       </Main>
-    </ApolloProvider>
+    </>
   )
 }
 

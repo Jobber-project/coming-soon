@@ -48,6 +48,7 @@ const Header = styled.h3`
   text-align: center;
   letter-spacing: 0.12em;
   margin: 0;
+  line-height: 130%;
 
   color: #ffffff;
   margin-top: 20px;
@@ -93,7 +94,6 @@ Punchline.propTypes = {
 Punchline.defaultProps = {
   title: 'JOBELLO',
   header: '',
-  paragraph:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Molestie viverra sapien accumsan, feugiat.',
+  paragraph: '',
   children: null,
 }

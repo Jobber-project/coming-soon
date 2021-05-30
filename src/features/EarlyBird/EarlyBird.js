@@ -4,12 +4,13 @@ import { useForm } from 'react-hook-form'
 import { gql, useMutation } from '@apollo/client'
 
 import Punchline from '../../components/Punchline'
+import Toast from '../../components/Toast'
 
 import PrivacyPolicyModal from './PrivacyPolicyModal'
 
 const TITLE = 'JOBELLO'
 const PARAGRAPH =
-  'Lansering är nära! Vill du vara redo när det händer? Skriv in e-mail nedan och starta klockan i gröna knappen så hör vi oss när det är dags. 😎'
+  'Lansering är nära! Vill du vara redo när det händer? Skriv in e-mail nedan så hör vi oss när det är dags. 😎'
 const TRANSITION = 500
 
 const fadeIn = keyframes`
@@ -66,13 +67,25 @@ const Email = styled.input`
   &::placeholder {
     color: rgba(196, 196, 196, 0.5);
   }
+
+  ::-webkit-input-placeholder {
+    font-style: italic;
+  }
+  :-moz-placeholder {
+    font-style: italic;
+  }
+  ::-moz-placeholder {
+    font-style: italic;
+  }
+  :-ms-input-placeholder {
+    font-style: italic;
+  }
 `
 
 const CheckboxWrapper = styled.div`
   margin-top: 15px;
   display: flex;
   flex-direction: row;
-  align-items: center;
 `
 
 const Checkbox = styled.input`
@@ -83,7 +96,10 @@ const Checkbox = styled.input`
 `
 
 const Label = styled.label`
+  line-height: normal;
   margin-left: 12px;
+  font-size: 1.4rem;
+  line-height: 1.375em;
   color: ${p => (p.error ? '#FF0000' : '#ffffff')};
   user-select: none;
 `
@@ -129,23 +145,23 @@ const Error = styled.div`
   padding-bottom: 8px;
 `
 
-const Policy = styled.button`
-  appearance: none;
-  border: none;
-  margin: 0;
-  padding: 0;
-  width: auto;
-  overflow: visible;
-  background: transparent;
-  font: inherit;
-  -webkit-font-smoothing: inherit;
-  -moz-osx-font-smoothing: inherit;
+// const Policy = styled.button`
+//   appearance: none;
+//   border: none;
+//   margin: 0;
+//   padding: 0;
+//   width: auto;
+//   overflow: visible;
+//   background: transparent;
+//   font: inherit;
+//   -webkit-font-smoothing: inherit;
+//   -moz-osx-font-smoothing: inherit;
 
-  display: inline-block;
-  color: ${props => (props.error ? 'red' : 'white')};
-  text-decoration: underline;
-  cursor: pointer;
-`
+//   display: inline-block;
+//   color: ${props => (props.error ? 'red' : 'white')};
+//   text-decoration: underline;
+//   cursor: pointer;
+// `
 
 const CREATE_EARLYBIRD = gql`
   mutation addEarlybird($email: String!) {
@@ -154,21 +170,22 @@ const CREATE_EARLYBIRD = gql`
 `
 
 export default function EarlyBird() {
-  const { register, handleSubmit, errors } = useForm()
+  const { register, handleSubmit, errors, reset } = useForm()
   const [createUser] = useMutation(CREATE_EARLYBIRD)
-  const [signup, setSignup] = useState('')
+  const [success, setSuccess] = useState(false)
 
   const modalRef = useRef(null)
 
   async function handleEarlyBird({ email }) {
-    if (signup === email) return
     try {
+      setSuccess(false)
       await createUser({
         variables: { email },
       })
-      setSignup(email)
+      setSuccess(true)
+      reset()
     } catch (err) {
-      // Random err
+      setSuccess(false)
     }
   }
 
@@ -181,13 +198,13 @@ export default function EarlyBird() {
               <Error>{errors?.email?.message || 'Ange E-postadress'}</Error>
             )}
             <Email
-              placeholder="Ange e-postadress"
+              placeholder="din@e-mail.se"
               type="input"
               ref={register({
                 required: true,
                 pattern: {
                   value: /[^@]+@[^@]+\w[^@]+/,
-                  message: 'Ange en korrekt E-postadress',
+                  message: 'Ange en korrekt e-postadress',
                 },
               })}
               name="email"
@@ -203,27 +220,32 @@ export default function EarlyBird() {
                 name="policy"
               />
               <Label htmlFor="checkbox" error={errors?.policy}>
-                Jag godkänner&nbsp;
+                Jag godkänner att Jobello kan kontakta mig via e-mail.
               </Label>
-              <Policy
+              {/* <Policy
                 id="privacy-policy"
                 type="button"
                 error={errors?.policy}
                 onClick={() => modalRef.current?.toggle?.()}
               >
                 villkoren
-              </Policy>
+              </Policy> */}
             </CheckboxWrapper>
 
             <Button>
               <ButtonText>
-                {signup ? 'Hörs snart! ⏰' : 'Följ oss redan idag!'}
+                {success ? 'Hörs snart! ⏰' : 'Följ oss redan idag!'}
               </ButtonText>
             </Button>
           </Form>
         </Punchline>
       </Wrapper>
       <PrivacyPolicyModal ref={modalRef} />
+      {success && (
+        <Toast>
+          Vi har skickat ett mejl (kolla skräppost). Hörs snart igen! 😊
+        </Toast>
+      )}
     </Box>
   )
 }

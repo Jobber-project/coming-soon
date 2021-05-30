@@ -5,9 +5,13 @@ import Confetti from 'react-dom-confetti'
 import Punchline from '../../components/Punchline'
 
 const TITLE = 'JOBELLO'
-const HEADER = 'Du hittade till Sveriges första sociala jobbsajt 🤩'
-const PARAGRAPH =
-  'Jobello är platsen där du kan skapa ett CV i världsklass, söka bland Sveriges alla jobbannonser och diskutera yrkesfrågor som hur man nailar arbetsintervjun, hittar drömjobbet, löneförhandlar eller planerar den årliga firmafesten med mycket mer! Självklart är allt helt gratis. Häng på! 😃'
+const HEADER =
+  'Välkommen till Sveriges första sociala jobbsajt för yrkesarbetare 🤩'
+const P1 =
+  'Här kommer du kunna skapa ett CV i världsklass, nätverka med andra och söka bland Sveriges alla jobbannonser på ett nytt smart sätt. '
+const P2 = 'Och självklart kommer allt att vara helt gratis. '
+const P3 = 'Häng på! 😃'
+
 const TRANSITION = 500
 
 const fadeIn = keyframes`
@@ -41,6 +45,34 @@ const Wrapper = styled.div`
   animation: ${fadeIn} ${TRANSITION / 1000}s ease-out;
 `
 
+const PaaragraphWrapper = styled.div`
+  text-align: center;
+`
+
+const Paragraph = styled.p`
+  display: inline;
+  font-weight: 300;
+  font-size: 1.6rem;
+  text-align: center;
+  line-height: 200%;
+  margin: 0;
+
+  color: white;
+  margin-top: 30px;
+`
+
+const FatParagraph = styled.p`
+  display: inline;
+  font-weight: 700;
+  font-size: 1.6rem;
+  text-align: center;
+  line-height: 200%;
+  margin: 0;
+
+  color: white;
+  margin-top: 30px;
+`
+
 const config = {
   angle: 90,
   spread: 360,
@@ -69,7 +101,13 @@ export default function Welcome() {
     <Box>
       <Wrapper>
         <Confetti active={explosion} config={config} />
-        <Punchline title={TITLE} header={HEADER} paragraph={PARAGRAPH} />
+        <Punchline title={TITLE} header={HEADER}>
+          <PaaragraphWrapper>
+            <Paragraph>{P1}</Paragraph>
+            <FatParagraph>{P2}</FatParagraph>
+            <Paragraph>{P3}</Paragraph>
+          </PaaragraphWrapper>
+        </Punchline>
       </Wrapper>
     </Box>
   )

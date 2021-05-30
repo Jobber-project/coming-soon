@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { gql, useMutation } from '@apollo/client'
 
 import Punchline from '../../components/Punchline'
+import Toast from '../../components/Toast'
 
 import PrivacyPolicyModal from './PrivacyPolicyModal'
 
@@ -85,7 +86,6 @@ const CheckboxWrapper = styled.div`
   margin-top: 15px;
   display: flex;
   flex-direction: row;
-  align-items: center;
 `
 
 const Checkbox = styled.input`
@@ -98,6 +98,8 @@ const Checkbox = styled.input`
 const Label = styled.label`
   line-height: normal;
   margin-left: 12px;
+  font-size: 1.4rem;
+  line-height: 1.375em;
   color: ${p => (p.error ? '#FF0000' : '#ffffff')};
   user-select: none;
 `
@@ -168,21 +170,22 @@ const CREATE_EARLYBIRD = gql`
 `
 
 export default function EarlyBird() {
-  const { register, handleSubmit, errors } = useForm()
+  const { register, handleSubmit, errors, reset } = useForm()
   const [createUser] = useMutation(CREATE_EARLYBIRD)
-  const [signup, setSignup] = useState('')
+  const [success, setSuccess] = useState(false)
 
   const modalRef = useRef(null)
 
   async function handleEarlyBird({ email }) {
-    if (signup === email) return
     try {
+      setSuccess(false)
       await createUser({
         variables: { email },
       })
-      setSignup(email)
+      setSuccess(true)
+      reset()
     } catch (err) {
-      // Random err
+      setSuccess(false)
     }
   }
 
@@ -201,7 +204,7 @@ export default function EarlyBird() {
                 required: true,
                 pattern: {
                   value: /[^@]+@[^@]+\w[^@]+/,
-                  message: 'Ange en korrekt E-postadress',
+                  message: 'Ange en korrekt e-postadress',
                 },
               })}
               name="email"
@@ -231,13 +234,18 @@ export default function EarlyBird() {
 
             <Button>
               <ButtonText>
-                {signup ? 'Hörs snart! ⏰' : 'Följ oss redan idag!'}
+                {success ? 'Hörs snart! ⏰' : 'Följ oss redan idag!'}
               </ButtonText>
             </Button>
           </Form>
         </Punchline>
       </Wrapper>
       <PrivacyPolicyModal ref={modalRef} />
+      {success && (
+        <Toast>
+          Vi har skickat ett mejl (kolla skräppost). Hörs snart igen! 😊
+        </Toast>
+      )}
     </Box>
   )
 }

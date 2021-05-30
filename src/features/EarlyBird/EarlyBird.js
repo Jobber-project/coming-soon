@@ -10,7 +10,7 @@ import PrivacyPolicyModal from './PrivacyPolicyModal'
 
 const TITLE = 'JOBELLO'
 const PARAGRAPH =
-  'Lansering är nära! Vill du vara redo när det händer? Skriv in e-mail nedan så hör vi oss när det är dags. 😎'
+  'Lansering är nära! Skriv in e-mail nedan så hör vi oss när det är dags.'
 const TRANSITION = 500
 
 const fadeIn = keyframes`
@@ -48,7 +48,8 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   margin-top: 23px;
-  width: 320px;
+  width: 100%;
+  max-width: 400px;
 `
 
 const Email = styled.input`
@@ -234,7 +235,7 @@ export default function EarlyBird() {
 
             <Button>
               <ButtonText>
-                {success ? 'Hörs snart! ⏰' : 'Följ oss redan idag!'}
+                {success ? 'Hörs snart! ⏰' : 'Häng med på resan!'}
               </ButtonText>
             </Button>
           </Form>

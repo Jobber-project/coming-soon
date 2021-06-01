@@ -10,7 +10,7 @@ import PrivacyPolicyModal from './PrivacyPolicyModal'
 
 const TITLE = 'JOBELLO'
 const PARAGRAPH =
-  'Lansering är nära! Skriv in e-mail nedan så hör vi oss när det är dags.'
+  'Lansering är nära! Skriv in e-mail nedan så hör vi av oss när det är dags.'
 const TRANSITION = 500
 
 const fadeIn = keyframes`

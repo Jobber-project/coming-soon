@@ -29,7 +29,6 @@ const PunchlineWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   max-width: 600px;
 `
 
@@ -51,7 +50,7 @@ const Header = styled.h3`
   line-height: 130%;
 
   color: #ffffff;
-  margin-top: 20px;
+  margin-top: 30px;
 `
 
 const Paragraph = styled.p`

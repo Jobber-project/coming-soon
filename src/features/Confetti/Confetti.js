@@ -5,11 +5,10 @@ import Confetti from 'react-dom-confetti'
 import Punchline from '../../components/Punchline'
 
 const TITLE = 'JOBELLO'
-const HEADER =
-  'Välkommen till Sveriges första sociala jobbsajt för yrkesarbetare 🤩'
+const HEADER = 'Sveriges första sociala jobbsajt för yrkesarbetare.'
 const P1 =
   'Här kommer du kunna skapa ett CV i världsklass, nätverka med andra och söka bland Sveriges alla jobbannonser på ett nytt smart sätt. '
-const P2 = 'Och självklart kommer allt att vara helt gratis. '
+const P2 = 'Självklart helt gratis. '
 const P3 = 'Häng på! 😃'
 
 const TRANSITION = 500
@@ -46,6 +45,7 @@ const Wrapper = styled.div`
 `
 
 const PaaragraphWrapper = styled.div`
+  padding-top: 30px;
   text-align: center;
 `
 
@@ -66,7 +66,6 @@ const FatParagraph = styled.p`
   font-weight: 700;
   font-size: 1.6rem;
   text-align: center;
-  line-height: 200%;
   margin: 0;
 
   color: white;

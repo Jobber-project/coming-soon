@@ -30,27 +30,24 @@ const PunchlineWrapper = styled.div`
   align-items: center;
   justify-content: center;
   max-width: 600px;
-`
-
-const Title = styled.h1`
-  font-weight: bold;
-  font-size: 6.4rem;
-  letter-spacing: 0.12em;
-  margin: 0;
-
-  color: #ffffff;
+  @media (max-width: 600px) {
+    padding: 0 20px;
+  }
 `
 
 const Header = styled.h3`
   font-weight: bold;
-  font-size: 3.6rem;
+  font-size: 4.8rem;
   text-align: center;
   letter-spacing: 0.12em;
   margin: 0;
   line-height: 130%;
 
+  @media (max-width: 600px) {
+    font-size: 3.2rem;
+  }
+
   color: #ffffff;
-  margin-top: 30px;
 `
 
 const Paragraph = styled.p`
@@ -64,7 +61,7 @@ const Paragraph = styled.p`
   margin-top: 30px;
 `
 
-export default function Punchline({ title, header, paragraph, children }) {
+export default function Punchline({ header, paragraph, children }) {
   const content = [
     header ? <Header>{header}</Header> : null,
     paragraph ? <Paragraph>{paragraph}</Paragraph> : null,
@@ -72,7 +69,6 @@ export default function Punchline({ title, header, paragraph, children }) {
   ]
   return (
     <PunchlineWrapper>
-      <Title>{title}</Title>
       {content.filter(Boolean).map((item, index) => (
         // eslint-disable-next-line react/no-array-index-key
         <Container key={index} index={index}>
@@ -84,14 +80,12 @@ export default function Punchline({ title, header, paragraph, children }) {
 }
 
 Punchline.propTypes = {
-  title: PropTypes.string,
   header: PropTypes.string,
   paragraph: PropTypes.string,
   children: PropTypes.node,
 }
 
 Punchline.defaultProps = {
-  title: 'JOBELLO',
   header: '',
   paragraph: '',
   children: null,

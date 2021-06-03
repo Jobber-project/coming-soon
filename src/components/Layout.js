@@ -41,10 +41,10 @@ const Head = styled.div`
 `
 
 const LogoWrapper = styled.div`
-  padding: 20px 20px 0;
-
-  @media (min-width: 600px) {
-    padding: 40px 40px 0;
+  padding: 10px 10px 0;
+  @media (max-width: 600px) {
+    position: absolute;
+    left: 50%;
   }
 `
 

@@ -41,6 +41,10 @@ const Head = styled.div`
 `
 
 const LogoWrapper = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
   padding: 20px 20px 0;
 
   @media (min-width: 600px) {
@@ -55,37 +59,37 @@ const Main = styled.main`
   height: 100%;
 `
 
-// const Button = styled.button`
-//   -webkit-appearance: none;
-//   outline: none;
-//   appearance: none;
-//   border: none;
-//   cursor: pointer;
-//   align-items: center;
-//   justify-content: center;
-//   height: 42px;
-//   background: #56bd66;
-//   border-radius: 8px;
-//   padding: 0px 20px;
-//   &:hover {
-//     background: #5ec36e;
-//   }
+const Button = styled.button`
+  -webkit-appearance: none;
+  outline: none;
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  background: #56bd66;
+  border-radius: 8px;
+  padding: 0px 20px;
+  &:hover {
+    background: #5ec36e;
+  }
 
-//   &:active {
-//     background: #55b363;
-//   }
-// `
+  &:active {
+    background: #55b363;
+  }
+`
 
-// const ButtonText = styled.p`
-//   font-style: normal;
-//   font-weight: 500;
-//   font-size: 1.6rem;
-//   cursor: pointer;
-//   user-select: none;
-//   outline: none;
-//   border: none;
-//   color: #ffffff;
-// `
+const ButtonText = styled.p`
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.6rem;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  border: none;
+  color: #ffffff;
+`
 
 export default function Layout({ title, children }) {
   return (
@@ -103,14 +107,12 @@ export default function Layout({ title, children }) {
           <Link to="/">
             <Logo />
           </Link>
-        </LogoWrapper>
-        {/* <LogoWrapper>
-          <Link to="https://dev.jobello.se/">
+          <Link to="https://beta.jobello.se/auth">
             <Button>
-              <ButtonText>Maria, testa beta här!</ButtonText>
+              <ButtonText>Testa beta här!</ButtonText>
             </Button>
           </Link>
-        </LogoWrapper> */}
+        </LogoWrapper>
       </Head>
       <Main>
         {children}

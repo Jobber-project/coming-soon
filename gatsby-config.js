@@ -15,15 +15,15 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-google-analytics',
+      resolve: 'gatsby-plugin-google-gtag',
       options: {
-        trackingId: 'G-BD1NXEB34Z',
-        head: true,
-        anonymize: true,
-        respectDNT: true,
-        pageTransitionDelay: 0,
-        defer: true,
-        cookieDomain: 'jobello.se',
+        trackingIds: ['G-Y93WFG5F08'],
+        gtagConfig: {
+          anonymize_ip: true,
+        },
+        pluginConfig: {
+          respectDNT: true,
+        },
       },
     },
     'gatsby-plugin-react-helmet',

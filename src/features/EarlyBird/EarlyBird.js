@@ -8,9 +8,8 @@ import Toast from '../../components/Toast'
 
 import PrivacyPolicyModal from './PrivacyPolicyModal'
 
-const TITLE = 'JOBELLO'
-const PARAGRAPH =
-  'Lansering är nära! Skriv in e-mail nedan så hör vi av oss när det är dags.'
+const HEADER = 'Lansering är nära!'
+const PARAGRAPH = 'Skriv in e-mail nedan så hör vi av oss när det är dags.'
 const TRANSITION = 500
 
 const fadeIn = keyframes`
@@ -193,7 +192,7 @@ export default function EarlyBird() {
   return (
     <Box>
       <Wrapper>
-        <Punchline title={TITLE} paragraph={PARAGRAPH}>
+        <Punchline paragraph={PARAGRAPH} header={HEADER}>
           <Form autoComplete="off" onSubmit={handleSubmit(handleEarlyBird)}>
             {errors?.email && (
               <Error>{errors?.email?.message || 'Ange E-postadress'}</Error>

@@ -100,7 +100,7 @@ export default function Welcome() {
     <Box>
       <Wrapper>
         <Confetti active={explosion} config={config} />
-        <Punchline title={TITLE} header={HEADER}>
+        <Punchline showLogo title={TITLE} header={HEADER}>
           <PaaragraphWrapper>
             <Paragraph>{P1}</Paragraph>
             <FatParagraph>{P2}</FatParagraph>

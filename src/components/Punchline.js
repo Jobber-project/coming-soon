@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css, keyframes } from 'styled-components'
 
+import Logo from './Logo'
+
 const animation = keyframes`
   0% {
     opacity: 0;
@@ -32,15 +34,6 @@ const PunchlineWrapper = styled.div`
   max-width: 600px;
 `
 
-const Title = styled.h1`
-  font-weight: bold;
-  font-size: 6.4rem;
-  letter-spacing: 0.12em;
-  margin: 0;
-
-  color: #ffffff;
-`
-
 const Header = styled.h3`
   font-weight: bold;
   font-size: 3.6rem;
@@ -64,15 +57,15 @@ const Paragraph = styled.p`
   margin-top: 30px;
 `
 
-export default function Punchline({ title, header, paragraph, children }) {
+export default function Punchline({ showLogo, header, paragraph, children }) {
   const content = [
+    showLogo ? <Logo /> : null,
     header ? <Header>{header}</Header> : null,
     paragraph ? <Paragraph>{paragraph}</Paragraph> : null,
     children ?? null,
   ]
   return (
     <PunchlineWrapper>
-      <Title>{title}</Title>
       {content.filter(Boolean).map((item, index) => (
         // eslint-disable-next-line react/no-array-index-key
         <Container key={index} index={index}>
@@ -84,14 +77,14 @@ export default function Punchline({ title, header, paragraph, children }) {
 }
 
 Punchline.propTypes = {
-  title: PropTypes.string,
+  showLogo: PropTypes.bool,
   header: PropTypes.string,
   paragraph: PropTypes.string,
   children: PropTypes.node,
 }
 
 Punchline.defaultProps = {
-  title: 'JOBELLO',
+  showLogo: false,
   header: '',
   paragraph: '',
   children: null,

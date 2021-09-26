@@ -104,12 +104,14 @@ export default function Layout({ title, children }) {
       <GlobalStyle />
       <Head>
         <LogoWrapper>
-          <Link to="/">
-            <Logo />
-          </Link>
+          <div>
+            <Link to="/">
+              <Logo />
+            </Link>
+          </div>
           <Link to="https://beta.jobello.se/auth">
             <Button>
-              <ButtonText>Testa beta här!</ButtonText>
+              <ButtonText>Logga in (beta)</ButtonText>
             </Button>
           </Link>
         </LogoWrapper>
